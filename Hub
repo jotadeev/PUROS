@@ -1632,15 +1632,29 @@ local script = G2L["2e"];
 	
 	-- // FUNÇÃO: Atualizar posição dos círculos
 	local function atualizarDots()
+		-- Calcula o tamanho da tela
+		local screenResolution = game:GetService("GuiService"):GetScreenResolution()
+	
 		for plr, circle in pairs(dots) do
 			local char = plr.Character
 			if char and plr.Team ~= player.Team then
 				local head = char:FindFirstChild("Head")
 				local humanoid = char:FindFirstChildOfClass("Humanoid")
 				if head and humanoid and humanoid.Health > 0 then
-					local pos, vis = camera:WorldToViewportPoint(head.Position)
-					if vis then
-						circle.Position = Vector2.new(pos.X, pos.Y)
+					-- Calcula posição na tela com profundidade fixa
+					local viewportPoint = camera:WorldToViewportPoint(head.Position)
+	
+					-- Se o ponto está visível
+					if viewportPoint.Z > 0 then
+						-- Posição em pixels da tela
+						circle.Position = Vector2.new(
+							viewportPoint.X,
+							viewportPoint.Y
+						)
+	
+						-- Mantém o raio constante em pixels
+						circle.Radius = 8
+	
 						circle.Visible = true
 					else
 						circle.Visible = false
@@ -1694,7 +1708,6 @@ local script = G2L["2e"];
 			dots[plr] = nil
 		end
 	end)
-	
 end;
 task.spawn(C_2e);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option3.Health.Check.CheckButton.Health
