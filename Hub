@@ -891,7 +891,7 @@ G2L["56"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["56"]["TextScaled"] = true;
 G2L["56"]["BackgroundColor3"] = Color3.fromRGB(21, 21, 21);
 G2L["56"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["56"]["PlaceholderText"] = [[0.25 - 0.5]];
+G2L["56"]["PlaceholderText"] = [[0.05 - 0.45]];
 G2L["56"]["Size"] = UDim2.new(0, 52, 0, 16);
 G2L["56"]["Position"] = UDim2.new(6.15137, 0, 0, 0);
 G2L["56"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
@@ -2251,8 +2251,8 @@ local script = G2L["58"];
 				-- Limita o valor entre 0.025 e 0.5
 				if num < 0.05 then
 					num = 0.05
-				elseif num > 0.5 then
-					num = 0.5
+				elseif num > 0.45 then
+					num = 0.45
 				end
 	
 				-- Atualiza o valor
