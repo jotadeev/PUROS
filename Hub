@@ -418,6 +418,7 @@ G2L["28"]["Position"] = UDim2.new(0.00282, 0, 0, 0);
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option2
 G2L["29"] = Instance.new("Frame", G2L["19"]);
+G2L["29"]["Visible"] = false;
 G2L["29"]["BorderSizePixel"] = 0;
 G2L["29"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
 G2L["29"]["Size"] = UDim2.new(0.95714, 0, 0.09589, 0);
@@ -1486,8 +1487,10 @@ local script = G2L["2e"];
 	
 		if ativo then
 			bt.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- fundo branco ativo
+			bt.BackgroundTransparency = 0
 		else
 			bt.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- fundo preto desativado
+			bt.BackgroundTransparency = 1
 			removerCirculos()
 		end
 	end)
@@ -1553,11 +1556,14 @@ local script = G2L["36"];
 	
 	-- // FUNÇÃO: Atualizar posição e tamanho da barra de vida
 	local function atualizarBarras()
+		local alturaMax = 35 -- Altura fixa
+		local largura = 4
+	
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Team ~= player.Team and plr.Character and plr.Character:FindFirstChild("Head") and plr.Character:FindFirstChild("Humanoid") then
 				local head = plr.Character.Head
-				local humanoid = plr.Character:FindFirstChild("Humanoid")
-				local pos, visivel = camera:WorldToViewportPoint(head.Position)
+				local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
+				local pos, visivel = camera:WorldToViewportPoint(head.Position + Vector3.new(-2, 0, 0)) -- lado esquerdo do jogador
 	
 				if visivel and humanoid.Health > 0 then
 					local pair = barras[plr] or criarBarra()
@@ -1565,30 +1571,25 @@ local script = G2L["36"];
 					local outline = pair.Outline
 	
 					local hpPercent = math.clamp(humanoid.Health / humanoid.MaxHealth, 0, 1)
-	
-					local alturaMax = 35
-					local largura = 4
 					local alturaAtual = alturaMax * hpPercent
 	
-					local x = pos.X - 15
-					local y = pos.Y - (alturaMax / 2)
+					local x = pos.X
+					local y = pos.Y - alturaMax / 2
 	
-					-- Atualiza Outline
+					-- Outline
 					outline.Size = Vector2.new(largura + 2, alturaMax + 2)
 					outline.Position = Vector2.new(x - 1, y - 1)
 					outline.Visible = true
 	
-					-- Atualiza Barra Verde
+					-- Barra verde
 					bar.Size = Vector2.new(largura, alturaAtual)
 					bar.Position = Vector2.new(x, y + (alturaMax - alturaAtual))
 					bar.Visible = true
 	
 					barras[plr] = pair
-				else
-					if barras[plr] then
-						barras[plr].Bar.Visible = false
-						barras[plr].Outline.Visible = false
-					end
+				elseif barras[plr] then
+					barras[plr].Bar.Visible = false
+					barras[plr].Outline.Visible = false
 				end
 			elseif barras[plr] then
 				barras[plr].Bar.Visible = false
@@ -1610,7 +1611,7 @@ local script = G2L["36"];
 		ativo = not ativo
 	
 		if ativo then
-			bt.BackgroundTransparency = 0.35 -- Fundo branco visível igual ao ESP
+			bt.BackgroundTransparency = 0.35 -- Fundo visível
 		else
 			bt.BackgroundTransparency = 1
 			removerBarras()
@@ -1680,6 +1681,9 @@ local script = G2L["3d"];
 	
 	-- // FUNÇÃO: Atualizar Boxes
 	local function atualizarBoxes()
+		local tamanhoX = 40 -- largura fixa
+		local tamanhoY = 60 -- altura fixa
+	
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Team ~= player.Team and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character:FindFirstChild("Humanoid") then
 				local hrp = plr.Character.HumanoidRootPart
@@ -1691,24 +1695,20 @@ local script = G2L["3d"];
 					local box = pair.Box
 					local outline = pair.Outline
 	
-					local scale = 1 / (pos.Z / 100) * 2  -- ajusta tamanho com distância
-					local tamanhoX = math.clamp(40 * scale, 2, 400)
-					local tamanhoY = math.clamp(60 * scale, 2, 600)
-	
-					box.Size = Vector2.new(tamanhoX, tamanhoY)
+					-- Posição centrada no personagem
 					box.Position = Vector2.new(pos.X - tamanhoX / 2, pos.Y - tamanhoY / 2)
+					box.Size = Vector2.new(tamanhoX, tamanhoY)
 					box.Visible = true
 	
-					outline.Size = box.Size + Vector2.new(2, 2)
+					-- Outline
 					outline.Position = box.Position - Vector2.new(1, 1)
+					outline.Size = box.Size + Vector2.new(2, 2)
 					outline.Visible = true
 	
 					boxes[plr] = pair
-				else
-					if boxes[plr] then
-						boxes[plr].Box.Visible = false
-						boxes[plr].Outline.Visible = false
-					end
+				elseif boxes[plr] then
+					boxes[plr].Box.Visible = false
+					boxes[plr].Outline.Visible = false
 				end
 			elseif boxes[plr] then
 				boxes[plr].Box.Visible = false
@@ -1786,59 +1786,55 @@ task.spawn(C_46);
 local function C_4a()
 local script = G2L["4a"];
 	-- scripted by jvttatsu --
+	-- Aimbot robusto: captura teclas (inclui LMB/RMB), só mira se inimigo visível
 	
-	-- // SERVIÇOS
 	local UIS = game:GetService("UserInputService")
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
+	local workspace = game:GetService("Workspace")
 	local camera = workspace.CurrentCamera
 	
-	-- // VARIÁVEIS
 	local player = Players.LocalPlayer
-	local textBox = script.Parent
-	local aimbotKey = nil -- string interna, ex: "mousebutton1" ou "q" ou "space"
+	local textBox = script.Parent -- TextBox onde o usuário seta a key
+	
+	local aimbotKey = nil    -- string interna, ex: "mousebutton1", "q", "space"
 	local holding = false
-	local focusConnection
+	local focusConnection = nil
 	
-	-- // CONFIG
-	local smoothTime = 0.05 -- tempo de suavização em segundos
+	-- Suavização (em segundos)
+	local smoothTime = 0.05
 	
-	-- // Normaliza texto digitado para key interna + label
+	-- Normaliza texto digitado (ex: "LMB", "mousebutton1", "q", "space")
 	local function normalizeKeyFromText(text)
 		if not text then return nil, "" end
-		text = text:lower():gsub("%s+", "")
-	
-		if text == "lmb" or text == "mousebutton1" or text == "mouse1" or text == "mouse 1" then
+		local t = text:lower():gsub("%s+", "")
+		if t == "lmb" or t == "mousebutton1" or t == "mouse1" then
 			return "mousebutton1", "LMB"
-		elseif text == "rmb" or text == "mousebutton2" or text == "mouse2" or text == "mouse 2" then
+		elseif t == "rmb" or t == "mousebutton2" or t == "mouse2" then
 			return "mousebutton2", "RMB"
-		elseif text == "mmb" or text == "mousebutton3" or text == "mouse3" or text == "mouse 3" then
+		elseif t == "mmb" or t == "mousebutton3" or t == "mouse3" then
 			return "mousebutton3", "MMB"
 		else
-			-- se for uma tecla (ex "q", "space", "e", "f", "leftshift", "return", etc)
-			-- tenta pegar a primeira parte que faz sentido
-			-- se o usuário digitou algo como "Q" retornamos "q"
-			if #text >= 1 then
-				-- aceita nomes compostos como "leftshift" também
-				return text, text:upper()
+			-- aceita "space", "leftshift", "q", "e", etc
+			if #t >= 1 then
+				return t, t:upper()
 			end
 		end
-	
 		return nil, ""
 	end
 	
-	-- // Normaliza um InputObject (pro InputBegan durante o foco)
+	-- Normaliza um InputObject (quando o TextBox está focado e user pressiona algo)
 	local function normalizeKeyFromInput(input)
-		-- Mouse buttons
+		-- mouse buttons
 		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			return "mousebutton1", "LMB"
 		elseif input.UserInputType == Enum.UserInputType.MouseButton2 then
 			return "mousebutton2", "RMB"
 		elseif input.UserInputType == Enum.UserInputType.MouseButton3 then
 			return "mousebutton3", "MMB"
-			-- Keyboard
+			-- keyboard
 		elseif input.UserInputType == Enum.UserInputType.Keyboard then
-			local codeName = input.KeyCode and input.KeyCode.Name or nil
+			local codeName = input.KeyCode and input.KeyCode.Name
 			if codeName then
 				return codeName:lower(), codeName:upper()
 			end
@@ -1846,139 +1842,129 @@ local script = G2L["4a"];
 		return nil, ""
 	end
 	
-	-- // Quando o TextBox perde foco (usuario digitou a key manualmente e apertou Enter)
+	-- Ao perder foco: usuário pode ter digitado "q" e apertado Enter
 	textBox.FocusLost:Connect(function(enterPressed)
-		-- desconecta captura se tiver
+		-- desconecta captura temporária
 		if focusConnection then
 			focusConnection:Disconnect()
 			focusConnection = nil
 		end
 	
 		if not enterPressed then return end
-		local inputText = textBox.Text
-		if inputText and inputText ~= "" then
-			local normalized, display = normalizeKeyFromText(inputText)
-			if normalized then
-				aimbotKey = normalized
-				textBox.Text = "Key: " .. (display or normalized:upper())
-			else
-				textBox.Text = "Key: ?"
-			end
+		local txt = textBox.Text
+		local normalized, display = normalizeKeyFromText(txt)
+		if normalized then
+			aimbotKey = normalized
+			textBox.Text = "Key: " .. (display or normalized:upper())
+		else
+			textBox.Text = "Key: ?"
 		end
 	end)
 	
-	-- // Quando o TextBox ganha foco: capturar clique do mouse mesmo fora da UI
+	-- Ao focar: captura InputBegan globalmente para bind — permite clicar na tela (fora/embaixo de UI) para bind
 	textBox.Focused:Connect(function()
-		-- desconecta qualquer conexão anterior
+		-- remove conexão antiga se existir
 		if focusConnection then
 			focusConnection:Disconnect()
 		end
 	
-		-- Conexão que captura InputBegan globalmente enquanto o TextBox estiver focado
 		focusConnection = UIS.InputBegan:Connect(function(input, processed)
-			-- Queremos capturar LMB/RMB quando o clique for FORA da UI,
-			-- ou qualquer tecla do teclado (independente de processed).
-			-- Porém, normalmente mouse clicks sobre GUI setariam processed==true,
-			-- então a verificação abaixo garante que clique fora da UI seja capturado.
+			-- só enquanto o TextBox estiver focado
 			if not textBox:IsFocused() then return end
 	
-			-- Prioriza capturar mouse buttons quando o clique for FORA da UI (processed == false)
-			if (input.UserInputType == Enum.UserInputType.MouseButton1
-				or input.UserInputType == Enum.UserInputType.MouseButton2
-				or input.UserInputType == Enum.UserInputType.MouseButton3) then
-				if not processed then
-					local normalized, display = normalizeKeyFromInput(input)
-					if normalized then
-						aimbotKey = normalized
-						textBox.Text = "Key: " .. (display or normalized:upper())
-						textBox:ReleaseFocus()
-					end
+			-- capturar mouse buttons e teclas
+			local normalized, display = normalizeKeyFromInput(input)
+			if normalized then
+				-- Para bind, permitimos capturar independentemente de processed (usuário quer clicar qualquer lugar para bind)
+				aimbotKey = normalized
+				textBox.Text = "Key: " .. (display or normalized:upper())
+				textBox:ReleaseFocus()
+				-- desconecta que estava capturando
+				if focusConnection then
+					focusConnection:Disconnect()
+					focusConnection = nil
 				end
-				-- se processed == true (clicou sobre UI), ignora (porque você pediu "fora da UI")
 				return
 			end
 	
-			-- Se for teclado, capturamos sempre (teclado não seta processed pela GUI)
-			if input.UserInputType == Enum.UserInputType.Keyboard then
-				local normalized, display = normalizeKeyFromInput(input)
-				if normalized then
-					aimbotKey = normalized
-					-- display pode ser "Space" ou "Q" etc
-					textBox.Text = "Key: " .. (display or normalized:upper())
-					textBox:ReleaseFocus()
-				end
-				return
-			end
+			-- (caso Input não reconhecido, ignora)
 		end)
 	end)
 	
-	-- // Capturar início/ fim de input para manter holding true/false
-	UIS.InputBegan:Connect(function(input, processed)
-		-- se não há key configurada, nada a fazer
-		if not aimbotKey then return end
-	
-		-- Obtém nome do input atual na mesma forma que usamos para aimbotKey
-		local name
+	-- Helper: converte um InputObject recebido em nome interno compatível com aimbotKey
+	local function getInputName(input)
 		if input.UserInputType == Enum.UserInputType.Keyboard then
-			name = input.KeyCode and input.KeyCode.Name and input.KeyCode.Name:lower() or nil
+			return input.KeyCode and input.KeyCode.Name and input.KeyCode.Name:lower() or nil
 		elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-			name = "mousebutton1"
+			return "mousebutton1"
 		elseif input.UserInputType == Enum.UserInputType.MouseButton2 then
-			name = "mousebutton2"
+			return "mousebutton2"
 		elseif input.UserInputType == Enum.UserInputType.MouseButton3 then
-			name = "mousebutton3"
+			return "mousebutton3"
+		end
+		return nil
+	end
+	
+	-- InputBegan para ativar holding (uso normal do aimbot)
+	UIS.InputBegan:Connect(function(input, processed)
+		if not aimbotKey then return end
+		local name = getInputName(input)
+		if not name then return end
+	
+		-- Se o input for mouse button e o clique foi processado pela UI (processed==true),
+		-- então ignora (assim não ativa aimbot quando clicam em GUI).
+		if (name == "mousebutton1" or name == "mousebutton2" or name == "mousebutton3") and processed then
+			return
 		end
 	
-		if name and name == aimbotKey then
-			-- Se for mouse button e o clique foi processado por UI (processado pela GUI),
-			-- normalmente queremos ignorar (assim não ativa quando clicam em menu).
-			-- Mas se você prefere ativar mesmo clicando na UI, remova essa checagem.
-			if input.UserInputType == Enum.UserInputType.MouseButton1
-				or input.UserInputType == Enum.UserInputType.MouseButton2
-				or input.UserInputType == Enum.UserInputType.MouseButton3 then
-				if processed then return end
-			end
-	
+		if name == aimbotKey then
 			holding = true
 		end
 	end)
 	
 	UIS.InputEnded:Connect(function(input, processed)
 		if not aimbotKey then return end
+		local name = getInputName(input)
+		if not name then return end
 	
-		local name
-		if input.UserInputType == Enum.UserInputType.Keyboard then
-			name = input.KeyCode and input.KeyCode.Name and input.KeyCode.Name:lower() or nil
-		elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-			name = "mousebutton1"
-		elseif input.UserInputType == Enum.UserInputType.MouseButton2 then
-			name = "mousebutton2"
-		elseif input.UserInputType == Enum.UserInputType.MouseButton3 then
-			name = "mousebutton3"
-		end
-	
-		if name and name == aimbotKey then
+		if name == aimbotKey then
 			holding = false
 		end
 	end)
 	
-	-- // Função de visibilidade (raycast)
+	-- Função de visibilidade por raycast: retorna true se a câmera tem linha direta até targetPart (ex: Head)
 	local function isVisible(targetPart)
+		if not targetPart or not targetPart.Parent then return false end
 		local origin = camera.CFrame.Position
-		local direction = (targetPart.Position - origin)
+		local dirVec = (targetPart.Position - origin)
+		if dirVec.Magnitude <= 0 then return false end
+	
 		local raycastParams = RaycastParams.new()
 		raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
-		raycastParams.FilterDescendantsInstances = {player.Character}
-		-- Ignora personagens aliados? já é filtrado ao buscar alvos
-		local result = workspace:Raycast(origin, direction, raycastParams)
-		if result then
-			-- Só é visível se o hit for no próprio alvo (parte do personagem)
-			return result.Instance and result.Instance:IsDescendantOf(targetPart.Parent)
+		-- blacklist do próprio jogador para não colidir com nosso corpo / ferramentas
+		if player.Character then
+			raycastParams.FilterDescendantsInstances = {player.Character}
+		else
+			raycastParams.FilterDescendantsInstances = {}
 		end
+	
+		-- realiza o raycast até a distância do target
+		local result = workspace:Raycast(origin, dirVec, raycastParams)
+		if not result then
+			-- nada bloqueou: visível
+			return true
+		end
+	
+		-- se o primeiro objeto atingido for parte do target (ou descendente), então visível
+		local hitInst = result.Instance
+		if hitInst and hitInst:IsDescendantOf(targetPart.Parent) then
+			return true
+		end
+	
 		return false
 	end
 	
-	-- // Função para pegar inimigo mais próximo do centro com linha de visão
+	-- Pega o inimigo mais próximo do centro da tela E visível
 	local function getClosestEnemyToCenter()
 		local cam = camera
 		local center = Vector2.new(cam.ViewportSize.X / 2, cam.ViewportSize.Y / 2)
@@ -2003,27 +1989,32 @@ local script = G2L["4a"];
 		return closestPlayer
 	end
 	
-	-- // Suavização (Lerp)
+	-- Suavização (lerp entre CFrames)
 	local function smoothAim(current, target, alpha)
 		return current:Lerp(target, alpha)
 	end
 	
-	-- // Loop principal que aplica a mira suavizada
+	-- Loop principal: aplica mira suavizada enquanto holding == true
 	RunService.RenderStepped:Connect(function(dt)
-		if holding then
-			local cam = camera
-			local targetPlayer = getClosestEnemyToCenter()
+		if not holding then return end
+		local targetPlayer = getClosestEnemyToCenter()
+		if not targetPlayer then return end
+		if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then return end
 	
-			if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("Head") then
-				local targetPos = targetPlayer.Character.Head.Position
-				local direction = (targetPos - cam.CFrame.Position).Unit
-				local targetCFrame = CFrame.new(cam.CFrame.Position, cam.CFrame.Position + direction)
+		local head = targetPlayer.Character.Head
+		-- double-check vis (prevenção extra)
+		if not isVisible(head) then return end
 	
-				local alpha = math.clamp(dt / smoothTime, 0, 1)
-				local newCFrame = smoothAim(cam.CFrame, targetCFrame, alpha)
-				cam.CFrame = newCFrame
-			end
-		end
+		local cam = camera
+		local targetPos = head.Position
+		local dir = (targetPos - cam.CFrame.Position)
+		if dir.Magnitude <= 0 then return end
+		local direction = dir.Unit
+		local targetCFrame = CFrame.new(cam.CFrame.Position, cam.CFrame.Position + direction)
+	
+		local alpha = math.clamp(dt / smoothTime, 0, 1)
+		local newCFrame = smoothAim(cam.CFrame, targetCFrame, alpha)
+		camera.CFrame = newCFrame
 	end)
 	
 end;
