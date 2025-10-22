@@ -1596,14 +1596,14 @@ local script = G2L["2e"];
 	local ativo = false
 	local dots = {} -- [player] = círculo (Drawing object)
 	
-	-- // FUNÇÃO: Criar círculo
+	-- // FUNÇÃO: Criar círculo (apenas contorno)
 	local function criarDot()
 		local circle = Drawing.new("Circle")
 		circle.Color = Color3.fromRGB(255, 255, 255)
 		circle.Thickness = 1.5
-		circle.NumSides = 24
-		circle.Radius = 6
-		circle.Filled = true
+		circle.NumSides = 30
+		circle.Radius = 8 -- tamanho fixo do contorno da cabeça
+		circle.Filled = false -- só o contorno
 		circle.Transparency = 1
 		circle.Visible = false
 		return circle
@@ -1618,7 +1618,6 @@ local script = G2L["2e"];
 		local circle = criarDot()
 		dots[plr] = circle
 	
-		-- Respawn e morte
 		plr.CharacterAdded:Connect(function(char)
 			local humanoid = char:WaitForChild("Humanoid", 10)
 			if humanoid then
