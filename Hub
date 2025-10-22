@@ -1174,7 +1174,7 @@ task.spawn(C_17);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option1.Check.CheckButton.ESP
 local function C_20()
 local script = G2L["20"];
-	-- scripted by jvttatsu --
+	
 	
 	-- Serviços
 	local Players = game:GetService("Players")
@@ -1197,7 +1197,7 @@ local script = G2L["20"];
 	-- Configurações
 	local espAtivo = false
 	local linhas = {} -- [player] = {line1, line2, ...}
-	_G.ESPCor = _G.ESPCor or Color3.fromRGB(255, 255, 255) -- Cor padrão: branca
+	_G.ESPCor = _G.ESPCor or Color3.fromRGB(255, 255, 255)
 	
 	local conexoes = {
 		{"Head", "UpperTorso"},
@@ -1226,45 +1226,58 @@ local script = G2L["20"];
 		return line
 	end
 	
-	-- Cria ESP para jogador (com suporte a respawn e morte)
+	-- Cria ESP para um Character
+	local function setupCharacterESP(plr, char)
+		if not linhas[plr] then linhas[plr] = {} end
+		if linhas[plr][char] then return end -- evita duplicata por respawn
+	
+		local charLines = {}
+		for i = 1, #conexoes do
+			charLines[i] = criarLinha()
+		end
+		linhas[plr][char] = charLines
+	
+		-- Destroi linhas quando morre
+		local humanoid = char:FindFirstChildOfClass("Humanoid")
+		if humanoid then
+			humanoid.Died:Connect(function()
+				for _, line in pairs(charLines) do
+					line.Visible = false
+				end
+			end)
+		end
+	end
+	
+	-- Cria ESP para jogador
 	local function criarESPParaJogador(plr)
 		if plr == player then return end
 		if plr.Team and player.Team and plr.Team == player.Team then return end
-		if linhas[plr] then return end
 	
-		linhas[plr] = {}
-	
-		for i = 1, #conexoes do
-			linhas[plr][i] = criarLinha()
+		-- Cria para Character atual
+		if plr.Character then
+			setupCharacterESP(plr, plr.Character)
 		end
 	
-		-- Controle de respawn e morte
+		-- Atualiza para respawns futuros
 		plr.CharacterAdded:Connect(function(char)
-			local humanoid = char:WaitForChild("Humanoid", 10)
-			if humanoid then
-				humanoid.Died:Connect(function()
-					if linhas[plr] then
-						for _, line in pairs(linhas[plr]) do
-							line.Visible = false
-						end
-					end
-				end)
-			end
+			setupCharacterESP(plr, char)
 		end)
 	end
 	
-	-- Ativa ESP para todos os jogadores atuais
+	-- Ativa ESP para todos os jogadores
 	local function ativarESP()
 		for _, plr in ipairs(Players:GetPlayers()) do
 			criarESPParaJogador(plr)
 		end
 	end
 	
-	-- Desativa e limpa ESP
+	-- Desativa ESP
 	local function desativarESP()
-		for _, linhaTable in pairs(linhas) do
-			for _, line in pairs(linhaTable) do
-				line:Remove()
+		for _, chars in pairs(linhas) do
+			for _, linhaTable in pairs(chars) do
+				for _, line in pairs(linhaTable) do
+					line:Remove()
+				end
 			end
 		end
 		table.clear(linhas)
@@ -1272,38 +1285,35 @@ local script = G2L["20"];
 	
 	-- Atualiza linhas
 	local function atualizarESP()
-		for target, linhaTable in pairs(linhas) do
-			local char = target.Character
-			if char and target.Team ~= player.Team then
-				local humanoid = char:FindFirstChildOfClass("Humanoid")
-				if humanoid and humanoid.Health > 0 then
-					for i, conn in ipairs(conexoes) do
-						local part0 = char:FindFirstChild(conn[1])
-						local part1 = char:FindFirstChild(conn[2])
-						local line = linhaTable[i]
-						if part0 and part1 then
-							local pos0, vis0 = camera:WorldToViewportPoint(part0.Position)
-							local pos1, vis1 = camera:WorldToViewportPoint(part1.Position)
-							if vis0 and vis1 then
-								line.From = Vector2.new(pos0.X, pos0.Y)
-								line.To = Vector2.new(pos1.X, pos1.Y)
-								line.Color = _G.ESPCor
-								line.Visible = true
+		for plr, chars in pairs(linhas) do
+			for char, linhaTable in pairs(chars) do
+				if char and char.Parent then
+					local humanoid = char:FindFirstChildOfClass("Humanoid")
+					if humanoid and humanoid.Health > 0 and plr.Team ~= player.Team then
+						for i, conn in ipairs(conexoes) do
+							local part0 = char:FindFirstChild(conn[1])
+							local part1 = char:FindFirstChild(conn[2])
+							local line = linhaTable[i]
+							if part0 and part1 then
+								local pos0, vis0 = camera:WorldToViewportPoint(part0.Position)
+								local pos1, vis1 = camera:WorldToViewportPoint(part1.Position)
+								if vis0 and vis1 then
+									line.From = Vector2.new(pos0.X, pos0.Y)
+									line.To = Vector2.new(pos1.X, pos1.Y)
+									line.Color = _G.ESPCor
+									line.Visible = true
+								else
+									line.Visible = false
+								end
 							else
 								line.Visible = false
 							end
-						else
+						end
+					else
+						for _, line in pairs(linhaTable) do
 							line.Visible = false
 						end
 					end
-				else
-					for _, line in pairs(linhaTable) do
-						line.Visible = false
-					end
-				end
-			else
-				for _, line in pairs(linhaTable) do
-					line.Visible = false
 				end
 			end
 		end
@@ -1346,8 +1356,10 @@ local script = G2L["20"];
 	-- Jogadores saem
 	Players.PlayerRemoving:Connect(function(plr)
 		if linhas[plr] then
-			for _, line in pairs(linhas[plr]) do
-				line:Remove()
+			for _, charLines in pairs(linhas[plr]) do
+				for _, line in pairs(charLines) do
+					line:Remove()
+				end
 			end
 			linhas[plr] = nil
 		end
@@ -1404,7 +1416,7 @@ task.spawn(C_25);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option2.HeadDot.Check.CheckButton.HdDot
 local function C_2e()
 local script = G2L["2e"];
-	-- Head Dot fixo na tela (não muda com distância)
+	
 	
 	-- // SERVIÇOS
 	local Players = game:GetService("Players")
@@ -1421,92 +1433,134 @@ local script = G2L["2e"];
 	
 	-- // CONFIG
 	local ativo = false
-	local circulos = {}
+	local linhasHead = {} -- [player] = {line1, line2, ...}
 	
-	-- // TAMANHO FIXO DO CÍRCULO
-	local raioFixo = 4 -- menor e mais preciso (antes era 8)
+	-- // CONEXÕES DA CABEÇA
+	local conexoesHead = {
+		{"Head", "UpperTorso"},
+		{"Head", "LeftUpperArm"},
+		{"Head", "RightUpperArm"},
+	}
 	
-	-- // FUNÇÃO: Criar círculo branco
-	local function criarCirculo()
-		local circle = Drawing.new("Circle")
-		circle.Color = Color3.fromRGB(255, 255, 255)
-		circle.Thickness = 1
-		circle.Radius = raioFixo
-		circle.NumSides = 32
-		circle.Filled = false
-		circle.Visible = false
-		return circle
+	-- // FUNÇÃO: Criar linha
+	local function criarLinha()
+		local line = Drawing.new("Line")
+		line.Color = Color3.fromRGB(255, 255, 255)
+		line.Thickness = 2
+		line.Transparency = 1
+		line.Visible = false
+		return line
 	end
 	
-	-- // FUNÇÃO: Remover todos os círculos
-	local function removerCirculos()
-		for _, circle in pairs(circulos) do
-			if circle then
-				circle.Visible = false
-				circle:Remove()
-			end
+	-- // FUNÇÃO: Criar linhas para um jogador
+	local function criarHeadSkeleton(plr)
+		if plr == player then return end
+		if plr.Team and player.Team and plr.Team == player.Team then return end
+		if linhasHead[plr] then return end
+	
+		linhasHead[plr] = {}
+	
+		for i = 1, #conexoesHead do
+			linhasHead[plr][i] = criarLinha()
 		end
-		table.clear(circulos)
-	end
 	
-	-- // FUNÇÃO: Atualizar posição dos círculos
-	local function atualizarCirculos()
-		for _, plr in pairs(Players:GetPlayers()) do
-			if plr ~= player and plr.Team ~= player.Team then
-				local char = plr.Character
-				if char and char:FindFirstChild("Head") and char:FindFirstChildOfClass("Humanoid") then
-					local head = char.Head
-					local humanoid = char:FindFirstChildOfClass("Humanoid")
-	
-					if humanoid.Health > 0 then
-						local pos, visivel = camera:WorldToViewportPoint(head.Position)
-						if visivel then
-							local circle = circulos[plr] or criarCirculo()
-							circle.Position = Vector2.new(pos.X, pos.Y)
-							circle.Visible = true
-							circulos[plr] = circle
-						elseif circulos[plr] then
-							circulos[plr].Visible = false
+		-- Respawn e morte
+		plr.CharacterAdded:Connect(function(char)
+			local humanoid = char:WaitForChild("Humanoid", 10)
+			if humanoid then
+				humanoid.Died:Connect(function()
+					if linhasHead[plr] then
+						for _, line in pairs(linhasHead[plr]) do
+							line.Visible = false
 						end
-					elseif circulos[plr] then
-						circulos[plr].Visible = false
 					end
-				elseif circulos[plr] then
-					circulos[plr].Visible = false
+				end)
+			end
+		end)
+	end
+	
+	-- // FUNÇÃO: Atualizar linhas
+	local function atualizarHeadSkeleton()
+		for target, linhaTable in pairs(linhasHead) do
+			local char = target.Character
+			if char and target.Team ~= player.Team then
+				local humanoid = char:FindFirstChildOfClass("Humanoid")
+				if humanoid and humanoid.Health > 0 then
+					for i, conn in ipairs(conexoesHead) do
+						local part0 = char:FindFirstChild(conn[1])
+						local part1 = char:FindFirstChild(conn[2])
+						local line = linhaTable[i]
+						if part0 and part1 then
+							local pos0, vis0 = camera:WorldToViewportPoint(part0.Position)
+							local pos1, vis1 = camera:WorldToViewportPoint(part1.Position)
+							if vis0 and vis1 then
+								line.From = Vector2.new(pos0.X, pos0.Y)
+								line.To = Vector2.new(pos1.X, pos1.Y)
+								line.Visible = true
+							else
+								line.Visible = false
+							end
+						else
+							line.Visible = false
+						end
+					end
+				else
+					for _, line in pairs(linhaTable) do
+						line.Visible = false
+					end
 				end
-			elseif circulos[plr] then
-				circulos[plr].Visible = false
+			else
+				for _, line in pairs(linhaTable) do
+					line.Visible = false
+				end
 			end
 		end
 	end
 	
-	-- // LOOP: Atualização contínua
-	RunService.RenderStepped:Connect(function()
-		if ativo then
-			atualizarCirculos()
-		end
-	end)
-	
-	-- // EVENTO: Clique no botão (toggle visual e funcional)
+	-- // BOTÃO TOGGLE
 	bt.MouseButton1Click:Connect(function()
 		click:Play()
 		ativo = not ativo
 	
 		if ativo then
-			bt.BackgroundColor3 = ativo and 0.35 or 1
-			bt.BackgroundTransparency = 0
+			bt.BackgroundTransparency = 0.35
+			-- Criar ESP para todos os jogadores
+			for _, plr in pairs(Players:GetPlayers()) do
+				criarHeadSkeleton(plr)
+			end
 		else
-			bt.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 			bt.BackgroundTransparency = 1
-			removerCirculos()
+			-- Remover linhas
+			for _, linhaTable in pairs(linhasHead) do
+				for _, line in pairs(linhaTable) do
+					line:Remove()
+				end
+			end
+			table.clear(linhasHead)
 		end
 	end)
 	
-	-- // LIMPAR QUANDO JOGADOR SAIR
+	-- // Atualização contínua
+	RunService.RenderStepped:Connect(function()
+		if ativo then
+			atualizarHeadSkeleton()
+		end
+	end)
+	
+	-- // Jogadores entram
+	Players.PlayerAdded:Connect(function(plr)
+		if ativo then
+			criarHeadSkeleton(plr)
+		end
+	end)
+	
+	-- // Jogadores saem
 	Players.PlayerRemoving:Connect(function(plr)
-		if circulos[plr] then
-			circulos[plr]:Remove()
-			circulos[plr] = nil
+		if linhasHead[plr] then
+			for _, line in pairs(linhasHead[plr]) do
+				line:Remove()
+			end
+			linhasHead[plr] = nil
 		end
 	end)
 	
