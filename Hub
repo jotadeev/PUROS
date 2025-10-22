@@ -2012,8 +2012,8 @@ local script = G2L["4a"];
 	
 	-- DEFAULTS / LIMITES
 	local DEFAULT_SMOOTH = 0.04
-	local MIN_SMOOTH = 0.025
-	local MAX_SMOOTH = 0.5
+	local MIN_SMOOTH = 0.05
+	local MAX_SMOOTH = 0.45
 	
 	-- Smoothness storage: NumberValue chamado "SmoothnessValue"
 	local SmoothnessValue = script:FindFirstChild("SmoothnessValue")
@@ -2249,8 +2249,8 @@ local script = G2L["58"];
 	
 			if num then
 				-- Limita o valor entre 0.025 e 0.5
-				if num < 0.025 then
-					num = 0.025
+				if num < 0.05 then
+					num = 0.05
 				elseif num > 0.5 then
 					num = 0.5
 				end
