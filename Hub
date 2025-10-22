@@ -882,7 +882,6 @@ G2L["55"]["Position"] = UDim2.new(1.172, 0, -0.05, 0);
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.SmoothBox
 G2L["56"] = Instance.new("TextBox", G2L["51"]);
 G2L["56"]["Visible"] = false;
-G2L["56"]["CursorPosition"] = -1;
 G2L["56"]["Name"] = [[SmoothBox]];
 G2L["56"]["BorderSizePixel"] = 0;
 G2L["56"]["TextWrapped"] = true;
@@ -1722,14 +1721,14 @@ local script = G2L["36"];
 	local barras = {}
 	
 	-- Dimensões e posição
-	local larguraBarra = 3
+	local larguraBarra = 2
 	local offsetX = -20 -- distância da esquerda da box
 	
 	-- Cria barra de HP + outline
 	local function criarBarra()
 		local outline = Drawing.new("Square")
 		outline.Color = Color3.fromRGB(0, 0, 0)
-		outline.Thickness = 0.6
+		outline.Thickness = 0.4
 		outline.Filled = false
 		outline.Visible = false
 	
@@ -1989,7 +1988,7 @@ local script = G2L["46"];
 			BotaoClicado = false
 			kb.Visible = false
 			sp.Visible = false
-			sm.Visible = true
+			sm.Visible = false
 			bt.BackgroundTransparency = 1
 		end
 	end)
