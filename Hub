@@ -1413,7 +1413,7 @@ local script = G2L["2e"];
 	
 	-- // VARIÁVEIS
 	local player = Players.LocalPlayer
-	local bt = script.Parent -- botão real (TextButton, não Frame)
+	local bt = script.Parent
 	
 	-- // SONS
 	local sounds = script:FindFirstAncestorWhichIsA("ScreenGui"):WaitForChild("Sounds")
@@ -1424,13 +1424,13 @@ local script = G2L["2e"];
 	local circulos = {}
 	
 	-- // TAMANHO FIXO DO CÍRCULO
-	local raioFixo = 8 -- tamanho fixo do ponto na cabeça (em pixels)
+	local raioFixo = 4 -- menor e mais preciso (antes era 8)
 	
 	-- // FUNÇÃO: Criar círculo branco
 	local function criarCirculo()
 		local circle = Drawing.new("Circle")
 		circle.Color = Color3.fromRGB(255, 255, 255)
-		circle.Thickness = 1.5
+		circle.Thickness = 1
 		circle.Radius = raioFixo
 		circle.NumSides = 32
 		circle.Filled = false
@@ -1535,13 +1535,13 @@ local script = G2L["36"];
 	
 	-- Dimensões e posição
 	local larguraBarra = 3
-	local offsetX = -25 -- distância da esquerda da box
+	local offsetX = -20 -- distância da esquerda da box
 	
 	-- Cria barra de HP + outline
 	local function criarBarra()
 		local outline = Drawing.new("Square")
 		outline.Color = Color3.fromRGB(0, 0, 0)
-		outline.Thickness = 0.75
+		outline.Thickness = 0.6
 		outline.Filled = false
 		outline.Visible = false
 	
@@ -1673,7 +1673,7 @@ local script = G2L["3d"];
 	local function criarBox()
 		local outline = Drawing.new("Square")
 		outline.Color = Color3.fromRGB(0, 0, 0)
-		outline.Thickness = 1.5
+		outline.Thickness = 0.6
 		outline.Filled = false
 		outline.Visible = false
 	
