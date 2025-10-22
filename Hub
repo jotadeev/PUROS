@@ -7,7 +7,7 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
 ]=]
 
--- Instances: 103 | Scripts: 17 | Modules: 0 | Tags: 0
+-- Instances: 122 | Scripts: 20 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.UIPuros
@@ -93,7 +93,7 @@ G2L["9"]["TextSize"] = 14;
 G2L["9"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-G2L["9"]["Size"] = UDim2.new(0.04346, 0, 0.08513, 0);
+G2L["9"]["Size"] = UDim2.new(0.0461, 0, 0.08101, 0);
 G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["9"]["Text"] = [[]];
 G2L["9"]["Name"] = [[Open]];
@@ -118,7 +118,7 @@ G2L["c"]["BorderSizePixel"] = 0;
 G2L["c"]["TextSize"] = 14;
 G2L["c"]["TextScaled"] = true;
 G2L["c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["c"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Normal);
+G2L["c"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Italic);
 G2L["c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["c"]["BackgroundTransparency"] = 1;
 G2L["c"]["Size"] = UDim2.new(1, 0, 1, 0);
@@ -178,7 +178,7 @@ G2L["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["12"]["Name"] = [[Line]];
 
 
--- StarterGui.UIPuros.MainFrame.TextLabel
+-- StarterGui.UIPuros.MainFrame.Title
 G2L["13"] = Instance.new("TextLabel", G2L["f"]);
 G2L["13"]["TextWrapped"] = true;
 G2L["13"]["BorderSizePixel"] = 0;
@@ -191,23 +191,25 @@ G2L["13"]["BackgroundTransparency"] = 1;
 G2L["13"]["Size"] = UDim2.new(0.20063, 0, 0.07692, 0);
 G2L["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["13"]["Text"] = [[Puros]];
+G2L["13"]["Name"] = [[Title]];
 G2L["13"]["Position"] = UDim2.new(0.01184, 0, 0.0069, 0);
 
 
--- StarterGui.UIPuros.MainFrame.TextLabel
+-- StarterGui.UIPuros.MainFrame.Version
 G2L["14"] = Instance.new("TextLabel", G2L["f"]);
 G2L["14"]["TextWrapped"] = true;
 G2L["14"]["BorderSizePixel"] = 0;
 G2L["14"]["TextSize"] = 14;
-G2L["14"]["TextTransparency"] = 0.6;
+G2L["14"]["TextTransparency"] = 0.3;
 G2L["14"]["TextScaled"] = true;
 G2L["14"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["14"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["14"]["TextColor3"] = Color3.fromRGB(109, 109, 109);
 G2L["14"]["BackgroundTransparency"] = 1;
-G2L["14"]["Size"] = UDim2.new(0.09, 0, 0.041, 0);
+G2L["14"]["Size"] = UDim2.new(0.08058, 0, 0.041, 0);
 G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["14"]["Text"] = [[v1.0.2]];
+G2L["14"]["Text"] = [[v1.0.3]];
+G2L["14"]["Name"] = [[Version]];
 G2L["14"]["Position"] = UDim2.new(0.175, 0, 0.032, 0);
 
 
@@ -766,259 +768,451 @@ G2L["4a"] = Instance.new("LocalScript", G2L["48"]);
 G2L["4a"]["Name"] = [[Aimbot]];
 
 
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.KeyBoxAim.Aimbot.SmoothnessValue
+G2L["4b"] = Instance.new("NumberValue", G2L["4a"]);
+G2L["4b"]["Name"] = [[SmoothnessValue]];
+
+
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Topbar
-G2L["4b"] = Instance.new("Frame", G2L["3f"]);
-G2L["4b"]["BorderSizePixel"] = 0;
-G2L["4b"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
-G2L["4b"]["Size"] = UDim2.new(1, 0, 0.09589, 0);
-G2L["4b"]["Position"] = UDim2.new(0, 0, -0.00268, 0);
-G2L["4b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4b"]["Name"] = [[Topbar]];
+G2L["4c"] = Instance.new("Frame", G2L["3f"]);
+G2L["4c"]["BorderSizePixel"] = 0;
+G2L["4c"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["4c"]["Size"] = UDim2.new(1, 0, 0.09589, 0);
+G2L["4c"]["Position"] = UDim2.new(0, 0, -0.00268, 0);
+G2L["4c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4c"]["Name"] = [[Topbar]];
 
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Topbar.UIStroke
-G2L["4c"] = Instance.new("UIStroke", G2L["4b"]);
-G2L["4c"]["Thickness"] = 2;
-G2L["4c"]["Color"] = Color3.fromRGB(60, 60, 60);
+G2L["4d"] = Instance.new("UIStroke", G2L["4c"]);
+G2L["4d"]["Thickness"] = 2;
+G2L["4d"]["Color"] = Color3.fromRGB(60, 60, 60);
 
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Topbar.TextLabel
-G2L["4d"] = Instance.new("TextLabel", G2L["4b"]);
-G2L["4d"]["TextWrapped"] = true;
-G2L["4d"]["BorderSizePixel"] = 0;
-G2L["4d"]["TextSize"] = 14;
-G2L["4d"]["TextScaled"] = true;
-G2L["4d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["4d"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["4d"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["4d"]["BackgroundTransparency"] = 1;
-G2L["4d"]["Size"] = UDim2.new(0, 97, 0, 22);
-G2L["4d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4d"]["Text"] = [[Aimbot]];
-G2L["4d"]["Position"] = UDim2.new(0.01486, 0, -0.09143, 0);
+G2L["4e"] = Instance.new("TextLabel", G2L["4c"]);
+G2L["4e"]["TextWrapped"] = true;
+G2L["4e"]["BorderSizePixel"] = 0;
+G2L["4e"]["TextSize"] = 14;
+G2L["4e"]["TextScaled"] = true;
+G2L["4e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["4e"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["4e"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["4e"]["BackgroundTransparency"] = 1;
+G2L["4e"]["Size"] = UDim2.new(0, 97, 0, 22);
+G2L["4e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4e"]["Text"] = [[Aimbot]];
+G2L["4e"]["Position"] = UDim2.new(0.01486, 0, -0.09143, 0);
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2
+G2L["4f"] = Instance.new("Frame", G2L["3f"]);
+G2L["4f"]["Visible"] = false;
+G2L["4f"]["BorderSizePixel"] = 0;
+G2L["4f"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["4f"]["Size"] = UDim2.new(0.95714, 0, 0.09589, 0);
+G2L["4f"]["Position"] = UDim2.new(0.016, 0, 0.32, 0);
+G2L["4f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4f"]["Name"] = [[Option2]];
+G2L["4f"]["BackgroundTransparency"] = 1;
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness
+G2L["50"] = Instance.new("Frame", G2L["4f"]);
+G2L["50"]["BorderSizePixel"] = 0;
+G2L["50"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["50"]["Size"] = UDim2.new(1.04821, 0, -1.37028, 0);
+G2L["50"]["Position"] = UDim2.new(-0.02, 0, 1.2, 0);
+G2L["50"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["50"]["Name"] = [[Smoothness]];
+G2L["50"]["BackgroundTransparency"] = 0.99;
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check
+G2L["51"] = Instance.new("Frame", G2L["50"]);
+G2L["51"]["BorderSizePixel"] = 0;
+G2L["51"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["51"]["Size"] = UDim2.new(0, 19, 0, 16);
+G2L["51"]["Position"] = UDim2.new(0.07, 0, 0.15, 0);
+G2L["51"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["51"]["Name"] = [[Check]];
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.UIStroke
+G2L["52"] = Instance.new("UIStroke", G2L["51"]);
+G2L["52"]["Color"] = Color3.fromRGB(60, 60, 60);
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.CheckButton
+G2L["53"] = Instance.new("TextButton", G2L["51"]);
+G2L["53"]["BorderSizePixel"] = 0;
+G2L["53"]["TextSize"] = 14;
+G2L["53"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["53"]["BackgroundColor3"] = Color3.fromRGB(222, 222, 222);
+G2L["53"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["53"]["BackgroundTransparency"] = 1;
+G2L["53"]["Size"] = UDim2.new(0, 19, 0, 16);
+G2L["53"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["53"]["Text"] = [[]];
+G2L["53"]["Name"] = [[CheckButton]];
+G2L["53"]["Position"] = UDim2.new(0.00085, 0, 0, 0);
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.CheckButton.Smooth
+G2L["54"] = Instance.new("LocalScript", G2L["53"]);
+G2L["54"]["Name"] = [[Smooth]];
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.TextLabel
+G2L["55"] = Instance.new("TextLabel", G2L["51"]);
+G2L["55"]["TextWrapped"] = true;
+G2L["55"]["BorderSizePixel"] = 0;
+G2L["55"]["TextSize"] = 14;
+G2L["55"]["TextScaled"] = true;
+G2L["55"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["55"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["55"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["55"]["BackgroundTransparency"] = 1;
+G2L["55"]["Size"] = UDim2.new(0, 87, 0, 17);
+G2L["55"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["55"]["Text"] = [[Smoothness]];
+G2L["55"]["Position"] = UDim2.new(1.172, 0, -0.05, 0);
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.SmoothBox
+G2L["56"] = Instance.new("TextBox", G2L["51"]);
+G2L["56"]["Visible"] = false;
+G2L["56"]["CursorPosition"] = -1;
+G2L["56"]["Name"] = [[SmoothBox]];
+G2L["56"]["BorderSizePixel"] = 0;
+G2L["56"]["TextWrapped"] = true;
+G2L["56"]["TextSize"] = 14;
+G2L["56"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["56"]["TextScaled"] = true;
+G2L["56"]["BackgroundColor3"] = Color3.fromRGB(21, 21, 21);
+G2L["56"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["56"]["PlaceholderText"] = [[0.25 - 0.5]];
+G2L["56"]["Size"] = UDim2.new(0, 52, 0, 16);
+G2L["56"]["Position"] = UDim2.new(6.15137, 0, 0, 0);
+G2L["56"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["56"]["Text"] = [[]];
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.SmoothBox.UIStroke
+G2L["57"] = Instance.new("UIStroke", G2L["56"]);
+G2L["57"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+G2L["57"]["Thickness"] = 2;
+G2L["57"]["Color"] = Color3.fromRGB(60, 60, 60);
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.SmoothBox.Smoothness
+G2L["58"] = Instance.new("LocalScript", G2L["56"]);
+G2L["58"]["Name"] = [[Smoothness]];
 
 
 -- StarterGui.UIPuros.MainFrame.Buttons
-G2L["4e"] = Instance.new("Frame", G2L["f"]);
-G2L["4e"]["BorderSizePixel"] = 0;
-G2L["4e"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
-G2L["4e"]["Size"] = UDim2.new(0.56185, 0, 0.09055, 0);
-G2L["4e"]["Position"] = UDim2.new(0.43065, 0, 0.00254, 0);
-G2L["4e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4e"]["Name"] = [[Buttons]];
+G2L["59"] = Instance.new("Frame", G2L["f"]);
+G2L["59"]["BorderSizePixel"] = 0;
+G2L["59"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["59"]["Size"] = UDim2.new(0.56185, 0, 0.09055, 0);
+G2L["59"]["Position"] = UDim2.new(0.43065, 0, 0.00254, 0);
+G2L["59"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["59"]["Name"] = [[Buttons]];
 
 
 -- StarterGui.UIPuros.MainFrame.Buttons.MainButton
-G2L["4f"] = Instance.new("TextButton", G2L["4e"]);
-G2L["4f"]["TextWrapped"] = true;
-G2L["4f"]["BorderSizePixel"] = 0;
-G2L["4f"]["TextSize"] = 14;
-G2L["4f"]["TextScaled"] = true;
-G2L["4f"]["TextColor3"] = Color3.fromRGB(125, 125, 125);
-G2L["4f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["4f"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["4f"]["BackgroundTransparency"] = 1;
-G2L["4f"]["Size"] = UDim2.new(0.22985, 0, 0.72377, 0);
-G2L["4f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4f"]["Text"] = [[MAIN]];
-G2L["4f"]["Name"] = [[MainButton]];
-G2L["4f"]["Position"] = UDim2.new(0.55, 0, 0.077, 0);
+G2L["5a"] = Instance.new("TextButton", G2L["59"]);
+G2L["5a"]["TextWrapped"] = true;
+G2L["5a"]["BorderSizePixel"] = 0;
+G2L["5a"]["TextSize"] = 14;
+G2L["5a"]["TextScaled"] = true;
+G2L["5a"]["TextColor3"] = Color3.fromRGB(125, 125, 125);
+G2L["5a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["5a"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["5a"]["BackgroundTransparency"] = 1;
+G2L["5a"]["Size"] = UDim2.new(0.22985, 0, 0.72377, 0);
+G2L["5a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5a"]["Text"] = [[MAIN]];
+G2L["5a"]["Name"] = [[MainButton]];
+G2L["5a"]["Position"] = UDim2.new(0.55, 0, 0.077, 0);
 
 
 -- StarterGui.UIPuros.MainFrame.Buttons.MainButton.MainBScript
-G2L["50"] = Instance.new("LocalScript", G2L["4f"]);
-G2L["50"]["Name"] = [[MainBScript]];
+G2L["5b"] = Instance.new("LocalScript", G2L["5a"]);
+G2L["5b"]["Name"] = [[MainBScript]];
 
 
 -- StarterGui.UIPuros.MainFrame.Buttons.MiscButton
-G2L["51"] = Instance.new("TextButton", G2L["4e"]);
-G2L["51"]["TextWrapped"] = true;
-G2L["51"]["BorderSizePixel"] = 0;
-G2L["51"]["TextSize"] = 14;
-G2L["51"]["TextScaled"] = true;
-G2L["51"]["TextColor3"] = Color3.fromRGB(127, 127, 127);
-G2L["51"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["51"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["51"]["BackgroundTransparency"] = 1;
-G2L["51"]["Size"] = UDim2.new(0.21916, 0, 0.72406, 0);
-G2L["51"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["51"]["Text"] = [[MISC]];
-G2L["51"]["Name"] = [[MiscButton]];
-G2L["51"]["Position"] = UDim2.new(0.75, 0, 0.077, 0);
+G2L["5c"] = Instance.new("TextButton", G2L["59"]);
+G2L["5c"]["TextWrapped"] = true;
+G2L["5c"]["BorderSizePixel"] = 0;
+G2L["5c"]["TextSize"] = 14;
+G2L["5c"]["TextScaled"] = true;
+G2L["5c"]["TextColor3"] = Color3.fromRGB(127, 127, 127);
+G2L["5c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["5c"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["5c"]["BackgroundTransparency"] = 1;
+G2L["5c"]["Size"] = UDim2.new(0.21916, 0, 0.72406, 0);
+G2L["5c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5c"]["Text"] = [[MISC]];
+G2L["5c"]["Name"] = [[MiscButton]];
+G2L["5c"]["Position"] = UDim2.new(0.75, 0, 0.077, 0);
+
+
+-- StarterGui.UIPuros.MainFrame.Buttons.MiscButton.MiscBScript
+G2L["5d"] = Instance.new("LocalScript", G2L["5c"]);
+G2L["5d"]["Name"] = [[MiscBScript]];
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame
-G2L["52"] = Instance.new("Frame", G2L["f"]);
-G2L["52"]["BorderSizePixel"] = 0;
-G2L["52"]["BackgroundColor3"] = Color3.fromRGB(44, 44, 44);
-G2L["52"]["Size"] = UDim2.new(0.68665, 0, 0.79762, 0);
-G2L["52"]["Position"] = UDim2.new(0.15526, 0, 0.1284, 0);
-G2L["52"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["52"]["Name"] = [[HomeFrame]];
-G2L["52"]["BackgroundTransparency"] = 1;
+G2L["5e"] = Instance.new("Frame", G2L["f"]);
+G2L["5e"]["BorderSizePixel"] = 0;
+G2L["5e"]["BackgroundColor3"] = Color3.fromRGB(44, 44, 44);
+G2L["5e"]["Size"] = UDim2.new(0.68665, 0, 0.79762, 0);
+G2L["5e"]["Position"] = UDim2.new(0.15526, 0, 0.1284, 0);
+G2L["5e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5e"]["Name"] = [[HomeFrame]];
+G2L["5e"]["BackgroundTransparency"] = 1;
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.UICorner
-G2L["53"] = Instance.new("UICorner", G2L["52"]);
-G2L["53"]["CornerRadius"] = UDim.new(0, 15);
+G2L["5f"] = Instance.new("UICorner", G2L["5e"]);
+G2L["5f"]["CornerRadius"] = UDim.new(0, 15);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.Title
-G2L["54"] = Instance.new("TextLabel", G2L["52"]);
-G2L["54"]["TextWrapped"] = true;
-G2L["54"]["BorderSizePixel"] = 0;
-G2L["54"]["TextSize"] = 17;
-G2L["54"]["TextScaled"] = true;
-G2L["54"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["54"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.ExtraBold, Enum.FontStyle.Normal);
-G2L["54"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["54"]["BackgroundTransparency"] = 1;
-G2L["54"]["RichText"] = true;
-G2L["54"]["Size"] = UDim2.new(0.68173, 0, 0.15907, 0);
-G2L["54"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["54"]["Text"] = [[Welcome,]];
-G2L["54"]["Name"] = [[Title]];
-G2L["54"]["Position"] = UDim2.new(0.14611, 0, 0.03455, 0);
+G2L["60"] = Instance.new("TextLabel", G2L["5e"]);
+G2L["60"]["TextWrapped"] = true;
+G2L["60"]["BorderSizePixel"] = 0;
+G2L["60"]["TextSize"] = 17;
+G2L["60"]["TextScaled"] = true;
+G2L["60"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["60"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.ExtraBold, Enum.FontStyle.Normal);
+G2L["60"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["60"]["BackgroundTransparency"] = 1;
+G2L["60"]["RichText"] = true;
+G2L["60"]["Size"] = UDim2.new(0.68173, 0, 0.15907, 0);
+G2L["60"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["60"]["Text"] = [[Welcome,]];
+G2L["60"]["Name"] = [[Title]];
+G2L["60"]["Position"] = UDim2.new(0.14611, 0, 0.03455, 0);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.Title.UICorner
-G2L["55"] = Instance.new("UICorner", G2L["54"]);
-G2L["55"]["CornerRadius"] = UDim.new(0, 65);
+G2L["61"] = Instance.new("UICorner", G2L["60"]);
+G2L["61"]["CornerRadius"] = UDim.new(0, 65);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.Title.LocalScript
-G2L["56"] = Instance.new("LocalScript", G2L["54"]);
+G2L["62"] = Instance.new("LocalScript", G2L["60"]);
 
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.Plrname
-G2L["57"] = Instance.new("TextLabel", G2L["52"]);
-G2L["57"]["TextWrapped"] = true;
-G2L["57"]["BorderSizePixel"] = 0;
-G2L["57"]["TextSize"] = 17;
-G2L["57"]["TextScaled"] = true;
-G2L["57"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["57"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.ExtraBold, Enum.FontStyle.Normal);
-G2L["57"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["57"]["BackgroundTransparency"] = 1;
-G2L["57"]["RichText"] = true;
-G2L["57"]["Size"] = UDim2.new(0.68173, 0, 0.10293, 0);
-G2L["57"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["57"]["Text"] = [[PlrName]];
-G2L["57"]["Name"] = [[Plrname]];
-G2L["57"]["Position"] = UDim2.new(0.14611, 0, 0.16582, 0);
+G2L["63"] = Instance.new("TextLabel", G2L["5e"]);
+G2L["63"]["TextWrapped"] = true;
+G2L["63"]["BorderSizePixel"] = 0;
+G2L["63"]["TextSize"] = 17;
+G2L["63"]["TextScaled"] = true;
+G2L["63"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["63"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.ExtraBold, Enum.FontStyle.Normal);
+G2L["63"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["63"]["BackgroundTransparency"] = 1;
+G2L["63"]["RichText"] = true;
+G2L["63"]["Size"] = UDim2.new(0.68173, 0, 0.10293, 0);
+G2L["63"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["63"]["Text"] = [[PlrName]];
+G2L["63"]["Name"] = [[Plrname]];
+G2L["63"]["Position"] = UDim2.new(0.14611, 0, 0.16582, 0);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.Plrname.UICorner
-G2L["58"] = Instance.new("UICorner", G2L["57"]);
-G2L["58"]["CornerRadius"] = UDim.new(0, 65);
+G2L["64"] = Instance.new("UICorner", G2L["63"]);
+G2L["64"]["CornerRadius"] = UDim.new(0, 65);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.Plrname.LocalScript
-G2L["59"] = Instance.new("LocalScript", G2L["57"]);
+G2L["65"] = Instance.new("LocalScript", G2L["63"]);
 
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.select
-G2L["5a"] = Instance.new("TextLabel", G2L["52"]);
-G2L["5a"]["TextWrapped"] = true;
-G2L["5a"]["BorderSizePixel"] = 0;
-G2L["5a"]["TextSize"] = 17;
-G2L["5a"]["TextScaled"] = true;
-G2L["5a"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5a"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.ExtraBold, Enum.FontStyle.Normal);
-G2L["5a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["5a"]["BackgroundTransparency"] = 1;
-G2L["5a"]["RichText"] = true;
-G2L["5a"]["Size"] = UDim2.new(0.34297, 0, 0.07486, 0);
-G2L["5a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5a"]["Text"] = [[^ select any to start]];
-G2L["5a"]["Name"] = [[select]];
-G2L["5a"]["Position"] = UDim2.new(0.8511, 0, -0.0072, 0);
+G2L["66"] = Instance.new("TextLabel", G2L["5e"]);
+G2L["66"]["TextWrapped"] = true;
+G2L["66"]["BorderSizePixel"] = 0;
+G2L["66"]["TextSize"] = 17;
+G2L["66"]["TextScaled"] = true;
+G2L["66"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["66"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.ExtraBold, Enum.FontStyle.Normal);
+G2L["66"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["66"]["BackgroundTransparency"] = 1;
+G2L["66"]["RichText"] = true;
+G2L["66"]["Size"] = UDim2.new(0.34297, 0, 0.07486, 0);
+G2L["66"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["66"]["Text"] = [[^ select any to start]];
+G2L["66"]["Name"] = [[select]];
+G2L["66"]["Position"] = UDim2.new(0.8511, 0, -0.0072, 0);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.select.UICorner
-G2L["5b"] = Instance.new("UICorner", G2L["5a"]);
-G2L["5b"]["CornerRadius"] = UDim.new(0, 65);
+G2L["67"] = Instance.new("UICorner", G2L["66"]);
+G2L["67"]["CornerRadius"] = UDim.new(0, 65);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.ImageLabel
-G2L["5c"] = Instance.new("ImageLabel", G2L["52"]);
-G2L["5c"]["BorderSizePixel"] = 0;
-G2L["5c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["68"] = Instance.new("ImageLabel", G2L["5e"]);
+G2L["68"]["BorderSizePixel"] = 0;
+G2L["68"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 -- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
-G2L["5c"]["Image"] = [[rbxasset://textures/ui/GuiImagePlaceholder.png]];
-G2L["5c"]["Size"] = UDim2.new(0.3545, 0, 0.59886, 0);
-G2L["5c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5c"]["BackgroundTransparency"] = 1;
-G2L["5c"]["Position"] = UDim2.new(0.30928, 0, 0.28024, 0);
+G2L["68"]["Image"] = [[rbxasset://textures/ui/GuiImagePlaceholder.png]];
+G2L["68"]["Size"] = UDim2.new(0.3545, 0, 0.59886, 0);
+G2L["68"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["68"]["BackgroundTransparency"] = 1;
+G2L["68"]["Position"] = UDim2.new(0.30928, 0, 0.28024, 0);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.ImageLabel.UICorner
-G2L["5d"] = Instance.new("UICorner", G2L["5c"]);
-G2L["5d"]["CornerRadius"] = UDim.new(0, 65);
+G2L["69"] = Instance.new("UICorner", G2L["68"]);
+G2L["69"]["CornerRadius"] = UDim.new(0, 65);
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.ImageLabel.LocalScript
-G2L["5e"] = Instance.new("LocalScript", G2L["5c"]);
+G2L["6a"] = Instance.new("LocalScript", G2L["68"]);
 
 
 
 -- StarterGui.UIPuros.MainFrame.HomeFrame.ImageLabel.LocalScript
-G2L["5f"] = Instance.new("LocalScript", G2L["5c"]);
+G2L["6b"] = Instance.new("LocalScript", G2L["68"]);
 
+
+
+-- StarterGui.UIPuros.MainFrame.Misc
+G2L["6c"] = Instance.new("Frame", G2L["f"]);
+G2L["6c"]["Visible"] = false;
+G2L["6c"]["BorderSizePixel"] = 0;
+G2L["6c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["6c"]["Size"] = UDim2.new(0.99895, 0, 0.9014, 0);
+G2L["6c"]["Position"] = UDim2.new(0, 0, 0.09654, 0);
+G2L["6c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6c"]["Name"] = [[Misc]];
+G2L["6c"]["BackgroundTransparency"] = 1;
+
+
+-- StarterGui.UIPuros.MainFrame.Misc.MiscFrame
+G2L["6d"] = Instance.new("Frame", G2L["6c"]);
+G2L["6d"]["BorderSizePixel"] = 0;
+G2L["6d"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["6d"]["Size"] = UDim2.new(0.92128, 0, 0.77004, 0);
+G2L["6d"]["Position"] = UDim2.new(0.02981, 0, 0.05802, 0);
+G2L["6d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6d"]["Name"] = [[MiscFrame]];
+
+
+-- StarterGui.UIPuros.MainFrame.Misc.MiscFrame.UIStroke
+G2L["6e"] = Instance.new("UIStroke", G2L["6d"]);
+G2L["6e"]["Thickness"] = 2;
+G2L["6e"]["Color"] = Color3.fromRGB(60, 60, 60);
+
+
+-- StarterGui.UIPuros.MainFrame.Misc.MiscFrame.Topbar
+G2L["6f"] = Instance.new("Frame", G2L["6d"]);
+G2L["6f"]["BorderSizePixel"] = 0;
+G2L["6f"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["6f"]["Size"] = UDim2.new(1, 0, 0.11044, 0);
+G2L["6f"]["Position"] = UDim2.new(0, 0, -0.00268, 0);
+G2L["6f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6f"]["Name"] = [[Topbar]];
+
+
+-- StarterGui.UIPuros.MainFrame.Misc.MiscFrame.Topbar.UIStroke
+G2L["70"] = Instance.new("UIStroke", G2L["6f"]);
+G2L["70"]["Thickness"] = 2;
+G2L["70"]["Color"] = Color3.fromRGB(60, 60, 60);
+
+
+-- StarterGui.UIPuros.MainFrame.Misc.MiscFrame.Topbar.TextLabel
+G2L["71"] = Instance.new("TextLabel", G2L["6f"]);
+G2L["71"]["TextWrapped"] = true;
+G2L["71"]["BorderSizePixel"] = 0;
+G2L["71"]["TextSize"] = 14;
+G2L["71"]["TextScaled"] = true;
+G2L["71"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["71"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["71"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["71"]["BackgroundTransparency"] = 1;
+G2L["71"]["Size"] = UDim2.new(0, 146, 0, 20);
+G2L["71"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["71"]["Text"] = [[Miscellaneous]];
+G2L["71"]["Position"] = UDim2.new(-0.00163, 0, 0.0243, 0);
+
+
+-- StarterGui.UIPuros.MainFrame.Misc.MiscFrame.Topbar.TextLabel
+G2L["72"] = Instance.new("TextLabel", G2L["6f"]);
+G2L["72"]["TextWrapped"] = true;
+G2L["72"]["BorderSizePixel"] = 0;
+G2L["72"]["TextSize"] = 14;
+G2L["72"]["TextTransparency"] = 0.5;
+G2L["72"]["TextScaled"] = true;
+G2L["72"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["72"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["72"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["72"]["BackgroundTransparency"] = 1;
+G2L["72"]["Size"] = UDim2.new(0, 240, 0, 24);
+G2L["72"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["72"]["Text"] = [[IN-DEVELOPMENT]];
+G2L["72"]["Position"] = UDim2.new(0.26223, 0, 4.02148, 0);
 
 
 -- StarterGui.UIPuros.Sounds
-G2L["60"] = Instance.new("Folder", G2L["1"]);
-G2L["60"]["Name"] = [[Sounds]];
+G2L["73"] = Instance.new("Folder", G2L["1"]);
+G2L["73"]["Name"] = [[Sounds]];
 
 
 -- StarterGui.UIPuros.Sounds.Click
-G2L["61"] = Instance.new("Sound", G2L["60"]);
-G2L["61"]["Volume"] = 0.85;
-G2L["61"]["Name"] = [[Click]];
-G2L["61"]["SoundId"] = [[rbxassetid://4499400560]];
+G2L["74"] = Instance.new("Sound", G2L["73"]);
+G2L["74"]["Volume"] = 0.85;
+G2L["74"]["Name"] = [[Click]];
+G2L["74"]["SoundId"] = [[rbxassetid://4499400560]];
 
 
 -- StarterGui.UIPuros.Sounds.Hover
-G2L["62"] = Instance.new("Sound", G2L["60"]);
-G2L["62"]["Volume"] = 0.85;
-G2L["62"]["Name"] = [[Hover]];
-G2L["62"]["SoundId"] = [[rbxassetid://10066931761]];
+G2L["75"] = Instance.new("Sound", G2L["73"]);
+G2L["75"]["Volume"] = 0.85;
+G2L["75"]["Name"] = [[Hover]];
+G2L["75"]["SoundId"] = [[rbxassetid://10066931761]];
 
 
 -- StarterGui.UIPuros.Sounds.Woosh
-G2L["63"] = Instance.new("Sound", G2L["60"]);
-G2L["63"]["Name"] = [[Woosh]];
-G2L["63"]["SoundId"] = [[rbxassetid://9041161094]];
+G2L["76"] = Instance.new("Sound", G2L["73"]);
+G2L["76"]["Name"] = [[Woosh]];
+G2L["76"]["SoundId"] = [[rbxassetid://9041161094]];
 
 
 -- StarterGui.UIPuros.FOVCircle
-G2L["64"] = Instance.new("Frame", G2L["1"]);
-G2L["64"]["Visible"] = false;
-G2L["64"]["BorderSizePixel"] = 0;
-G2L["64"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["64"]["Size"] = UDim2.new(0.15217, 0, 0.28114, 0);
-G2L["64"]["Position"] = UDim2.new(0.42348, 0, 0.3198, 0);
-G2L["64"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["64"]["Name"] = [[FOVCircle]];
-G2L["64"]["BackgroundTransparency"] = 1;
+G2L["77"] = Instance.new("Frame", G2L["1"]);
+G2L["77"]["Visible"] = false;
+G2L["77"]["BorderSizePixel"] = 0;
+G2L["77"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["77"]["Size"] = UDim2.new(0.14967, 0, 0.22062, 0);
+G2L["77"]["Position"] = UDim2.new(0.4411, 0, 0.38857, 0);
+G2L["77"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["77"]["Name"] = [[FOVCircle]];
+G2L["77"]["BackgroundTransparency"] = 1;
 
 
 -- StarterGui.UIPuros.FOVCircle.UICorner
-G2L["65"] = Instance.new("UICorner", G2L["64"]);
-G2L["65"]["CornerRadius"] = UDim.new(0, 112);
+G2L["78"] = Instance.new("UICorner", G2L["77"]);
+G2L["78"]["CornerRadius"] = UDim.new(0, 112);
 
 
 -- StarterGui.UIPuros.FOVCircle.UIStroke
-G2L["66"] = Instance.new("UIStroke", G2L["64"]);
-G2L["66"]["Color"] = Color3.fromRGB(255, 255, 255);
+G2L["79"] = Instance.new("UIStroke", G2L["77"]);
+G2L["79"]["Color"] = Color3.fromRGB(255, 255, 255);
 
 
 -- StarterGui.UIPuros.Setting
-G2L["67"] = Instance.new("LocalScript", G2L["1"]);
-G2L["67"]["Name"] = [[Setting]];
+G2L["7a"] = Instance.new("LocalScript", G2L["1"]);
+G2L["7a"]["Name"] = [[Setting]];
 
 
 -- StarterGui.UIPuros.Open.OpenScript
@@ -1174,8 +1368,6 @@ task.spawn(C_17);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option1.Check.CheckButton.ESP
 local function C_20()
 local script = G2L["20"];
-	
-	
 	-- Serviços
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
@@ -1226,97 +1418,68 @@ local script = G2L["20"];
 		return line
 	end
 	
-	-- Cria ESP para um Character
-	local function setupCharacterESP(plr, char)
-		if not linhas[plr] then linhas[plr] = {} end
-		if linhas[plr][char] then return end -- evita duplicata por respawn
-	
-		local charLines = {}
-		for i = 1, #conexoes do
-			charLines[i] = criarLinha()
-		end
-		linhas[plr][char] = charLines
-	
-		-- Destroi linhas quando morre
-		local humanoid = char:FindFirstChildOfClass("Humanoid")
-		if humanoid then
-			humanoid.Died:Connect(function()
-				for _, line in pairs(charLines) do
-					line.Visible = false
-				end
-			end)
-		end
-	end
-	
-	-- Cria ESP para jogador
+	-- Cria ESP (linhas) para um jogador
 	local function criarESPParaJogador(plr)
 		if plr == player then return end
-		if plr.Team and player.Team and plr.Team == player.Team then return end
 	
-		-- Cria para Character atual
-		if plr.Character then
-			setupCharacterESP(plr, plr.Character)
+		-- Evita recriar linhas se já existem
+		if not linhas[plr] then
+			linhas[plr] = {}
+			for i = 1, #conexoes do
+				linhas[plr][i] = criarLinha()
+			end
 		end
 	
-		-- Atualiza para respawns futuros
-		plr.CharacterAdded:Connect(function(char)
-			setupCharacterESP(plr, char)
+		-- Atualiza ESP sempre que o Character for recriado
+		plr.CharacterAdded:Connect(function()
+			task.wait(0.5)
+			if not espAtivo then return end
 		end)
 	end
 	
-	-- Ativa ESP para todos os jogadores
-	local function ativarESP()
-		for _, plr in ipairs(Players:GetPlayers()) do
-			criarESPParaJogador(plr)
-		end
-	end
-	
-	-- Desativa ESP
-	local function desativarESP()
-		for _, chars in pairs(linhas) do
-			for _, linhaTable in pairs(chars) do
-				for _, line in pairs(linhaTable) do
-					line:Remove()
-				end
-			end
-		end
-		table.clear(linhas)
-	end
-	
-	-- Atualiza linhas
+	-- Atualiza posições dos desenhos
 	local function atualizarESP()
-		for plr, chars in pairs(linhas) do
-			for char, linhaTable in pairs(chars) do
-				if char and char.Parent then
-					local humanoid = char:FindFirstChildOfClass("Humanoid")
-					if humanoid and humanoid.Health > 0 and plr.Team ~= player.Team then
-						for i, conn in ipairs(conexoes) do
-							local part0 = char:FindFirstChild(conn[1])
-							local part1 = char:FindFirstChild(conn[2])
-							local line = linhaTable[i]
-							if part0 and part1 then
-								local pos0, vis0 = camera:WorldToViewportPoint(part0.Position)
-								local pos1, vis1 = camera:WorldToViewportPoint(part1.Position)
-								if vis0 and vis1 then
-									line.From = Vector2.new(pos0.X, pos0.Y)
-									line.To = Vector2.new(pos1.X, pos1.Y)
-									line.Color = _G.ESPCor
-									line.Visible = true
-								else
-									line.Visible = false
-								end
+		for _, plr in ipairs(Players:GetPlayers()) do
+			if plr ~= player and linhas[plr] then
+				local char = plr.Character
+				if char and char:FindFirstChildOfClass("Humanoid") and char:FindFirstChildOfClass("Humanoid").Health > 0 then
+					local timeIgual = (plr.Team == player.Team and plr.Team ~= nil)
+					for i, conn in ipairs(conexoes) do
+						local part0 = char:FindFirstChild(conn[1])
+						local part1 = char:FindFirstChild(conn[2])
+						local line = linhas[plr][i]
+						if part0 and part1 and not timeIgual then
+							local pos0, vis0 = camera:WorldToViewportPoint(part0.Position)
+							local pos1, vis1 = camera:WorldToViewportPoint(part1.Position)
+							if vis0 and vis1 then
+								line.From = Vector2.new(pos0.X, pos0.Y)
+								line.To = Vector2.new(pos1.X, pos1.Y)
+								line.Color = _G.ESPCor
+								line.Visible = true
 							else
 								line.Visible = false
 							end
-						end
-					else
-						for _, line in pairs(linhaTable) do
+						else
 							line.Visible = false
 						end
+					end
+				else
+					for _, line in pairs(linhas[plr]) do
+						line.Visible = false
 					end
 				end
 			end
 		end
+	end
+	
+	-- Limpa todos os desenhos
+	local function desativarESP()
+		for _, charLines in pairs(linhas) do
+			for _, line in pairs(charLines) do
+				line:Remove()
+			end
+		end
+		table.clear(linhas)
 	end
 	
 	-- Botão Toggle
@@ -1332,7 +1495,9 @@ local script = G2L["20"];
 	
 		if espAtivo then
 			bt.BackgroundTransparency = 0.35
-			ativarESP()
+			for _, plr in ipairs(Players:GetPlayers()) do
+				criarESPParaJogador(plr)
+			end
 		else
 			bt.BackgroundTransparency = 1
 			desativarESP()
@@ -1346,20 +1511,18 @@ local script = G2L["20"];
 		end
 	end)
 	
-	-- Jogadores novos entram
+	-- Jogadores novos
 	Players.PlayerAdded:Connect(function(plr)
 		if espAtivo then
 			criarESPParaJogador(plr)
 		end
 	end)
 	
-	-- Jogadores saem
+	-- Jogadores saindo
 	Players.PlayerRemoving:Connect(function(plr)
 		if linhas[plr] then
-			for _, charLines in pairs(linhas[plr]) do
-				for _, line in pairs(charLines) do
-					line:Remove()
-				end
+			for _, line in pairs(linhas[plr]) do
+				line:Remove()
 			end
 			linhas[plr] = nil
 		end
@@ -1416,8 +1579,6 @@ task.spawn(C_25);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option2.HeadDot.Check.CheckButton.HdDot
 local function C_2e()
 local script = G2L["2e"];
-	
-	
 	-- // SERVIÇOS
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
@@ -1433,86 +1594,63 @@ local script = G2L["2e"];
 	
 	-- // CONFIG
 	local ativo = false
-	local linhasHead = {} -- [player] = {line1, line2, ...}
+	local dots = {} -- [player] = círculo (Drawing object)
 	
-	-- // CONEXÕES DA CABEÇA
-	local conexoesHead = {
-		{"Head", "UpperTorso"},
-		{"Head", "LeftUpperArm"},
-		{"Head", "RightUpperArm"},
-	}
-	
-	-- // FUNÇÃO: Criar linha
-	local function criarLinha()
-		local line = Drawing.new("Line")
-		line.Color = Color3.fromRGB(255, 255, 255)
-		line.Thickness = 2
-		line.Transparency = 1
-		line.Visible = false
-		return line
+	-- // FUNÇÃO: Criar círculo
+	local function criarDot()
+		local circle = Drawing.new("Circle")
+		circle.Color = Color3.fromRGB(255, 255, 255)
+		circle.Thickness = 1.5
+		circle.NumSides = 24
+		circle.Radius = 6
+		circle.Filled = true
+		circle.Transparency = 1
+		circle.Visible = false
+		return circle
 	end
 	
-	-- // FUNÇÃO: Criar linhas para um jogador
-	local function criarHeadSkeleton(plr)
+	-- // FUNÇÃO: Criar Head Dot para jogador
+	local function criarHeadDot(plr)
 		if plr == player then return end
 		if plr.Team and player.Team and plr.Team == player.Team then return end
-		if linhasHead[plr] then return end
+		if dots[plr] then return end
 	
-		linhasHead[plr] = {}
-	
-		for i = 1, #conexoesHead do
-			linhasHead[plr][i] = criarLinha()
-		end
+		local circle = criarDot()
+		dots[plr] = circle
 	
 		-- Respawn e morte
 		plr.CharacterAdded:Connect(function(char)
 			local humanoid = char:WaitForChild("Humanoid", 10)
 			if humanoid then
 				humanoid.Died:Connect(function()
-					if linhasHead[plr] then
-						for _, line in pairs(linhasHead[plr]) do
-							line.Visible = false
-						end
+					if dots[plr] then
+						dots[plr].Visible = false
 					end
 				end)
 			end
 		end)
 	end
 	
-	-- // FUNÇÃO: Atualizar linhas
-	local function atualizarHeadSkeleton()
-		for target, linhaTable in pairs(linhasHead) do
-			local char = target.Character
-			if char and target.Team ~= player.Team then
+	-- // FUNÇÃO: Atualizar posição dos círculos
+	local function atualizarDots()
+		for plr, circle in pairs(dots) do
+			local char = plr.Character
+			if char and plr.Team ~= player.Team then
+				local head = char:FindFirstChild("Head")
 				local humanoid = char:FindFirstChildOfClass("Humanoid")
-				if humanoid and humanoid.Health > 0 then
-					for i, conn in ipairs(conexoesHead) do
-						local part0 = char:FindFirstChild(conn[1])
-						local part1 = char:FindFirstChild(conn[2])
-						local line = linhaTable[i]
-						if part0 and part1 then
-							local pos0, vis0 = camera:WorldToViewportPoint(part0.Position)
-							local pos1, vis1 = camera:WorldToViewportPoint(part1.Position)
-							if vis0 and vis1 then
-								line.From = Vector2.new(pos0.X, pos0.Y)
-								line.To = Vector2.new(pos1.X, pos1.Y)
-								line.Visible = true
-							else
-								line.Visible = false
-							end
-						else
-							line.Visible = false
-						end
+				if head and humanoid and humanoid.Health > 0 then
+					local pos, vis = camera:WorldToViewportPoint(head.Position)
+					if vis then
+						circle.Position = Vector2.new(pos.X, pos.Y)
+						circle.Visible = true
+					else
+						circle.Visible = false
 					end
 				else
-					for _, line in pairs(linhaTable) do
-						line.Visible = false
-					end
+					circle.Visible = false
 				end
 			else
-				for _, line in pairs(linhaTable) do
-					line.Visible = false
-				end
+				circle.Visible = false
 			end
 		end
 	end
@@ -1524,43 +1662,37 @@ local script = G2L["2e"];
 	
 		if ativo then
 			bt.BackgroundTransparency = 0.35
-			-- Criar ESP para todos os jogadores
 			for _, plr in pairs(Players:GetPlayers()) do
-				criarHeadSkeleton(plr)
+				criarHeadDot(plr)
 			end
 		else
 			bt.BackgroundTransparency = 1
-			-- Remover linhas
-			for _, linhaTable in pairs(linhasHead) do
-				for _, line in pairs(linhaTable) do
-					line:Remove()
-				end
+			for _, circle in pairs(dots) do
+				circle:Remove()
 			end
-			table.clear(linhasHead)
+			table.clear(dots)
 		end
 	end)
 	
 	-- // Atualização contínua
 	RunService.RenderStepped:Connect(function()
 		if ativo then
-			atualizarHeadSkeleton()
+			atualizarDots()
 		end
 	end)
 	
-	-- // Jogadores entram
+	-- // Jogadores novos
 	Players.PlayerAdded:Connect(function(plr)
 		if ativo then
-			criarHeadSkeleton(plr)
+			criarHeadDot(plr)
 		end
 	end)
 	
-	-- // Jogadores saem
+	-- // Jogadores saindo
 	Players.PlayerRemoving:Connect(function(plr)
-		if linhasHead[plr] then
-			for _, line in pairs(linhasHead[plr]) do
-				line:Remove()
-			end
-			linhasHead[plr] = nil
+		if dots[plr] then
+			dots[plr]:Remove()
+			dots[plr] = nil
 		end
 	end)
 	
@@ -1834,6 +1966,7 @@ local script = G2L["46"];
 	local bt = script.Parent
 	local kb = script.Parent.Parent.KeyBoxAim
 	local sp = script.Parent.Parent.Separador
+	local sm = script.Parent.Parent.Parent.Parent.Option2
 	-- sons
 	local sounds = script.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Sounds
 	local click = sounds.Click
@@ -1848,11 +1981,13 @@ local script = G2L["46"];
 			BotaoClicado = true
 			kb.Visible = true
 			sp.Visible = true
+			sm.Visible = true
 			bt.BackgroundTransparency = 0.35
 		else
 			BotaoClicado = false
 			kb.Visible = false
 			sp.Visible = false
+			sm.Visible = true
 			bt.BackgroundTransparency = 1
 		end
 	end)
@@ -1861,7 +1996,6 @@ task.spawn(C_46);
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.KeyBoxAim.Aimbot
 local function C_4a()
 local script = G2L["4a"];
-	
 	-- Aimbot robusto: pega inimigos do outro time, suavizado, sem raycast, LMB desativado
 	
 	local UIS = game:GetService("UserInputService")
@@ -1872,13 +2006,51 @@ local script = G2L["4a"];
 	local player = Players.LocalPlayer
 	local textBox = script.Parent
 	
-	
-	
 	local aimbotKey = nil
 	local holding = false
 	local focusConnection
 	
-	local smoothTime = 0.05 -- segundos para suavização
+	-- DEFAULTS / LIMITES
+	local DEFAULT_SMOOTH = 0.04
+	local MIN_SMOOTH = 0.025
+	local MAX_SMOOTH = 0.5
+	
+	-- Smoothness storage: NumberValue chamado "SmoothnessValue"
+	local SmoothnessValue = script:FindFirstChild("SmoothnessValue")
+	if not SmoothnessValue then
+		-- tenta achar em PlayerGui.Aimbot (caso o GUI organize isso assim)
+		local ok, gui = pcall(function()
+			return player:WaitForChild("PlayerGui"):FindFirstChild("Aimbot")
+		end)
+		if ok and gui then
+			SmoothnessValue = gui:FindFirstChild("SmoothnessValue")
+		end
+	end
+	if not SmoothnessValue then
+		SmoothnessValue = Instance.new("NumberValue")
+		SmoothnessValue.Name = "SmoothnessValue"
+		SmoothnessValue.Value = DEFAULT_SMOOTH
+		SmoothnessValue.Parent = script
+	end
+	
+	-- garante que o valor esteja no range
+	local function clampSmooth(v)
+		if v < MIN_SMOOTH then return MIN_SMOOTH end
+		if v > MAX_SMOOTH then return MAX_SMOOTH end
+		return v
+	end
+	SmoothnessValue.Value = clampSmooth(SmoothnessValue.Value)
+	
+	-- variavel local usada no loop (atualizada quando SmoothnessValue mudar)
+	local smoothTime = SmoothnessValue.Value
+	SmoothnessValue.Changed:Connect(function(newVal)
+		if type(newVal) ~= "number" then return end
+		smoothTime = clampSmooth(newVal)
+		-- opcional: garantir que o NumberValue também esteja clampado
+		if SmoothnessValue.Value ~= smoothTime then
+			SmoothnessValue.Value = smoothTime
+		end
+	end)
 	
 	-- Normaliza input do TextBox (ex: "RMB" -> "mousebutton2")
 	local function normalizeKeyFromText(text)
@@ -1915,7 +2087,7 @@ local script = G2L["4a"];
 		return nil, ""
 	end
 	
-	-- Ao perder foco
+	-- Ao perder foco (config da key via textBox)
 	textBox.FocusLost:Connect(function(enterPressed)
 		if focusConnection then
 			focusConnection:Disconnect()
@@ -2029,9 +2201,76 @@ local script = G2L["4a"];
 	
 end;
 task.spawn(C_4a);
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.CheckButton.Smooth
+local function C_54()
+local script = G2L["54"];
+	-- variáveis comuns
+	local bt = script.Parent
+	local smb = script.Parent.Parent:WaitForChild("SmoothBox")
+	
+	-- sons
+	local sounds = script:FindFirstAncestorWhichIsA("ScreenGui"):WaitForChild("Sounds")
+	local click = sounds:WaitForChild("Click")
+	local hover = sounds:WaitForChild("Hover")
+	local woosh = sounds:WaitForChild("Woosh")
+	
+	-- estado
+	local BotaoClicado = false
+	
+	-- clique do botão
+	bt.Activated:Connect(function()
+		click:Play()
+		BotaoClicado = not BotaoClicado
+	
+		smb.Visible = BotaoClicado
+		bt.BackgroundTransparency = BotaoClicado and 0.35 or 1
+	end)
+	
+end;
+task.spawn(C_54);
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option2.Smoothness.Check.SmoothBox.Smoothness
+local function C_58()
+local script = G2L["58"];
+	
+	-- Serviços
+	local Players = game:GetService("Players")
+	
+	-- Variáveis
+	local player = Players.LocalPlayer
+	local KeyBoxSmoo = script.Parent -- TextBox
+	local AimbotScript = script.Parent.Parent.Parent.Parent.Parent.Aimbot.Frame.KeyBoxAim:WaitForChild("Aimbot") -- ajuste se necessário
+	local SmoothnessValue = AimbotScript:WaitForChild("SmoothnessValue") -- NumberValue dentro do Aimbot
+	
+	-- Quando o jogador muda o texto e aperta Enter
+	KeyBoxSmoo.FocusLost:Connect(function(enterPressed)
+		if enterPressed then
+			local text = KeyBoxSmoo.Text
+			local num = tonumber(text)
+	
+			if num then
+				-- Limita o valor entre 0.025 e 0.5
+				if num < 0.025 then
+					num = 0.025
+				elseif num > 0.5 then
+					num = 0.5
+				end
+	
+				-- Atualiza o valor
+				SmoothnessValue.Value = num
+				KeyBoxSmoo.Text = tostring(num)
+				print("Smoothness atualizado para:", num)
+			else
+				warn("Valor inválido digitado em Smoothness!")
+				KeyBoxSmoo.Text = tostring(SmoothnessValue.Value)
+			end
+		end
+	end)
+	
+end;
+task.spawn(C_58);
 -- StarterGui.UIPuros.MainFrame.Buttons.MainButton.MainBScript
-local function C_50()
-local script = G2L["50"];
+local function C_5b()
+local script = G2L["5b"];
 	-- variavel do botao
 	local bt = script.Parent
 	
@@ -2042,6 +2281,7 @@ local script = G2L["50"];
 	-- frames
 	local frame = script.Parent.Parent.Parent.Aimbot
 	local home = script.Parent.Parent.Parent.HomeFrame
+	local misc = script.Parent.Parent.Parent.Misc
 	
 	-- outros textos e frames
 	local texto2 = script.Parent.Parent.MiscButton
@@ -2051,16 +2291,48 @@ local script = G2L["50"];
 		home.Visible = false
 		home.Interactable = false
 		frame.Visible = true
+		misc.Visible = false
 		bt.TextColor3 = Color3.new(1, 1, 1)
 		texto2.TextColor3 = Color3.new(0.498039, 0.498039, 0.498039)
 	end)
 	
 	--
 end;
-task.spawn(C_50);
+task.spawn(C_5b);
+-- StarterGui.UIPuros.MainFrame.Buttons.MiscButton.MiscBScript
+local function C_5d()
+local script = G2L["5d"];
+	-- variavel do botao
+	local bt = script.Parent
+	
+	-- sons
+	local sounds = script.Parent.Parent.Parent.Parent.Sounds
+	local click = sounds.Click
+	
+	-- frames
+	local frame = script.Parent.Parent.Parent.Misc
+	local home = script.Parent.Parent.Parent.HomeFrame
+	local aimbot = script.Parent.Parent.Parent.Aimbot
+	
+	-- outros textos e frames
+	local texto1 = script.Parent.Parent.MainButton
+	
+	bt.Activated:Connect(function()
+		click:Play()
+		home.Visible = false
+		home.Interactable = false
+		frame.Visible = true
+		aimbot.Visible = false
+		bt.TextColor3 = Color3.new(1, 1, 1)
+		texto1.TextColor3 = Color3.new(0.498039, 0.498039, 0.498039)
+	end)
+	
+	--
+end;
+task.spawn(C_5d);
 -- StarterGui.UIPuros.MainFrame.HomeFrame.Title.LocalScript
-local function C_56()
-local script = G2L["56"];
+local function C_62()
+local script = G2L["62"];
 	local textoCompleto = "Welcome," -- Texto que será digitado
 	local velocidade = 0.15 -- Tempo entre cada letra (em segundos)
 	
@@ -2079,10 +2351,10 @@ local script = G2L["56"];
 	escreverTexto()
 	
 end;
-task.spawn(C_56);
+task.spawn(C_62);
 -- StarterGui.UIPuros.MainFrame.HomeFrame.Plrname.LocalScript
-local function C_59()
-local script = G2L["59"];
+local function C_65()
+local script = G2L["65"];
 	local txt = script.Parent
 	local plr = game.Players.LocalPlayer
 	local textoCompleto = plr.name .. " ,@" .. plr.DisplayName -- Texto que será digitado
@@ -2102,17 +2374,17 @@ local script = G2L["59"];
 	-- Chamando a função
 	escreverTexto()
 end;
-task.spawn(C_59);
+task.spawn(C_65);
 -- StarterGui.UIPuros.MainFrame.HomeFrame.ImageLabel.LocalScript
-local function C_5e()
-local script = G2L["5e"];
+local function C_6a()
+local script = G2L["6a"];
 	-- ainda n fiz
 	
 end;
-task.spawn(C_5e);
+task.spawn(C_6a);
 -- StarterGui.UIPuros.MainFrame.HomeFrame.ImageLabel.LocalScript
-local function C_5f()
-local script = G2L["5f"];
+local function C_6b()
+local script = G2L["6b"];
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
 	
@@ -2132,13 +2404,13 @@ local script = G2L["5f"];
 	imageLabel.Image = content
 	
 end;
-task.spawn(C_5f);
+task.spawn(C_6b);
 -- StarterGui.UIPuros.Setting
-local function C_67()
-local script = G2L["67"];
+local function C_7a()
+local script = G2L["7a"];
 	local gui = script.Parent
 	gui.ResetOnSpawn = false
 end;
-task.spawn(C_67);
+task.spawn(C_7a);
 
 return G2L["1"], require;
