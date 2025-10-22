@@ -1788,13 +1788,11 @@ local script = G2L["46"];
 		if BotaoClicado == false then
 			BotaoClicado = true
 			kb.Visible = true
-			kb.Aimbot.Enabled = true
 			sp.Visible = true
 			bt.BackgroundTransparency = 0.35
 		else
 			BotaoClicado = false
 			kb.Visible = false
-			kb.Aimbot.Enabled = false
 			sp.Visible = false
 			bt.BackgroundTransparency = 1
 		end
