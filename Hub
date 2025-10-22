@@ -1493,7 +1493,7 @@ local script = G2L["2e"];
 		ativo = not ativo
 	
 		if ativo then
-			bt.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			bt.BackgroundColor3 = ativo and 0.35 or 1
 			bt.BackgroundTransparency = 0
 		else
 			bt.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -1824,7 +1824,7 @@ local script = G2L["4a"];
 	local holding = false
 	local focusConnection
 	
-	local smoothTime = 0.05 -- segundos para suavização
+	local smoothTime = 0.03 -- segundos para suavização
 	
 	-- Normaliza input do TextBox (ex: "RMB" -> "mousebutton2")
 	local function normalizeKeyFromText(text)
