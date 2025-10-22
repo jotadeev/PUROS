@@ -761,9 +761,9 @@ G2L["49"]["Thickness"] = 2;
 G2L["49"]["Color"] = Color3.fromRGB(60, 60, 60);
 
 
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.KeyBoxAim.LocalScript
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.KeyBoxAim.Aimbot
 G2L["4a"] = Instance.new("LocalScript", G2L["48"]);
-
+G2L["4a"]["Name"] = [[Aimbot]];
 
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Topbar
@@ -1509,25 +1509,24 @@ task.spawn(C_2e);
 local function C_36()
 local script = G2L["36"];
 	-- scripted by jvttatsu --
+	-- Barra de HP vertical com UIStroke, tamanho ajustável
 	
-	-- // SERVIÇOS
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
 	local camera = workspace.CurrentCamera
 	
-	-- // VARIÁVEIS
 	local player = Players.LocalPlayer
 	local bt = script.Parent
 	
-	-- // SONS
-	local sounds = script.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent:WaitForChild("Sounds")
+	-- Sons
+	local sounds = script:FindFirstAncestorWhichIsA("ScreenGui"):WaitForChild("Sounds")
 	local click = sounds:WaitForChild("Click")
 	
-	-- // CONFIG
+	-- Config
 	local ativo = false
 	local barras = {}
 	
-	-- // FUNÇÃO: Criar barra de vida com borda
+	-- Cria barra de HP + outline
 	local function criarBarra()
 		local outline = Drawing.new("Square")
 		outline.Color = Color3.fromRGB(0, 0, 0)
@@ -1543,7 +1542,6 @@ local script = G2L["36"];
 		return {Bar = bar, Outline = outline}
 	end
 	
-	-- // FUNÇÃO: Remover todas as barras
 	local function removerBarras()
 		for _, pair in pairs(barras) do
 			pair.Bar.Visible = false
@@ -1554,27 +1552,34 @@ local script = G2L["36"];
 		table.clear(barras)
 	end
 	
-	-- // FUNÇÃO: Atualizar posição e tamanho da barra de vida
 	local function atualizarBarras()
-		local alturaMax = 35 -- Altura fixa
-		local largura = 4
-	
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Team ~= player.Team and plr.Character and plr.Character:FindFirstChild("Head") and plr.Character:FindFirstChild("Humanoid") then
-				local head = plr.Character.Head
-				local humanoid = plr.Character:FindFirstChildOfClass("Humanoid")
-				local pos, visivel = camera:WorldToViewportPoint(head.Position + Vector3.new(-2, 0, 0)) -- lado esquerdo do jogador
+				local humanoid = plr.Character.Humanoid
+				if humanoid.Health <= 0 then
+					if barras[plr] then
+						barras[plr].Bar.Visible = false
+						barras[plr].Outline.Visible = false
+					end
+					continue
+				end
 	
-				if visivel and humanoid.Health > 0 then
+				local head = plr.Character.Head
+				local pos, visivel = camera:WorldToViewportPoint(head.Position)
+				if visivel then
 					local pair = barras[plr] or criarBarra()
 					local bar = pair.Bar
 					local outline = pair.Outline
 	
-					local hpPercent = math.clamp(humanoid.Health / humanoid.MaxHealth, 0, 1)
-					local alturaAtual = alturaMax * hpPercent
+					local hpPercent = humanoid.Health / humanoid.MaxHealth
 	
-					local x = pos.X
-					local y = pos.Y - alturaMax / 2
+					-- Tamanho máximo e mínimo fixos
+					local alturaMax = 35
+					local largura = 4
+					local alturaAtual = math.clamp(alturaMax * hpPercent, 2, alturaMax)
+	
+					local x = pos.X - 15
+					local y = pos.Y - (alturaMax / 2)
 	
 					-- Outline
 					outline.Size = Vector2.new(largura + 2, alturaMax + 2)
@@ -1598,27 +1603,26 @@ local script = G2L["36"];
 		end
 	end
 	
-	-- // LOOP: Atualização contínua
+	-- Loop principal
 	RunService.RenderStepped:Connect(function()
 		if ativo then
 			atualizarBarras()
 		end
 	end)
 	
-	-- // EVENTO: Clique no botão
+	-- Toggle
 	bt.MouseButton1Click:Connect(function()
 		click:Play()
 		ativo = not ativo
-	
 		if ativo then
-			bt.BackgroundTransparency = 0.35 -- Fundo visível
+			bt.BackgroundTransparency = 0.35
 		else
 			bt.BackgroundTransparency = 1
 			removerBarras()
 		end
 	end)
 	
-	-- // LIMPAR QUANDO JOGADOR SAIR
+	-- Limpeza ao sair do jogador
 	Players.PlayerRemoving:Connect(function(plr)
 		if barras[plr] then
 			barras[plr].Bar:Remove()
@@ -1633,29 +1637,27 @@ task.spawn(C_36);
 local function C_3d()
 local script = G2L["3d"];
 	-- scripted by jvttatsu --
+	-- Box ao redor do jogador inimigo, background invisível, stroke visível
 	
-	-- // SERVIÇOS
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
 	local camera = workspace.CurrentCamera
 	
-	-- // VARIÁVEIS
 	local player = Players.LocalPlayer
 	local bt = script.Parent
 	
-	-- // SONS
-	local sounds = script.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent:WaitForChild("Sounds")
+	-- Sons
+	local sounds = script:FindFirstAncestorWhichIsA("ScreenGui"):WaitForChild("Sounds")
 	local click = sounds:WaitForChild("Click")
 	
-	-- // CONFIG
+	-- Config
 	local ativo = false
 	local boxes = {}
 	
-	-- // FUNÇÃO: Criar Box
 	local function criarBox()
 		local outline = Drawing.new("Square")
 		outline.Color = Color3.fromRGB(0, 0, 0)
-		outline.Thickness = 3
+		outline.Thickness = 2
 		outline.Filled = false
 		outline.Visible = false
 	
@@ -1668,7 +1670,6 @@ local script = G2L["3d"];
 		return {Box = box, Outline = outline}
 	end
 	
-	-- // FUNÇÃO: Remover Boxes
 	local function removerBoxes()
 		for _, pair in pairs(boxes) do
 			pair.Box.Visible = false
@@ -1679,30 +1680,36 @@ local script = G2L["3d"];
 		table.clear(boxes)
 	end
 	
-	-- // FUNÇÃO: Atualizar Boxes
 	local function atualizarBoxes()
-		local tamanhoX = 40 -- largura fixa
-		local tamanhoY = 60 -- altura fixa
-	
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Team ~= player.Team and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character:FindFirstChild("Humanoid") then
 				local hrp = plr.Character.HumanoidRootPart
 				local humanoid = plr.Character.Humanoid
-				local pos, visivel = camera:WorldToViewportPoint(hrp.Position)
+				if humanoid.Health <= 0 then
+					if boxes[plr] then
+						boxes[plr].Box.Visible = false
+						boxes[plr].Outline.Visible = false
+					end
+					continue
+				end
 	
-				if visivel and humanoid.Health > 0 then
+				local pos, visivel = camera:WorldToViewportPoint(hrp.Position)
+				if visivel then
 					local pair = boxes[plr] or criarBox()
 					local box = pair.Box
 					local outline = pair.Outline
 	
-					-- Posição centrada no personagem
-					box.Position = Vector2.new(pos.X - tamanhoX / 2, pos.Y - tamanhoY / 2)
+					-- Tamanho fixo mínimo e máximo
+					local scale = 1 / math.clamp(pos.Z / 50, 0.5, 2)  -- ajusta o zoom com distância, mas limita
+					local tamanhoX = math.clamp(40 * scale, 10, 80)
+					local tamanhoY = math.clamp(60 * scale, 15, 120)
+	
 					box.Size = Vector2.new(tamanhoX, tamanhoY)
+					box.Position = Vector2.new(pos.X - tamanhoX / 2, pos.Y - tamanhoY / 2)
 					box.Visible = true
 	
-					-- Outline
-					outline.Position = box.Position - Vector2.new(1, 1)
 					outline.Size = box.Size + Vector2.new(2, 2)
+					outline.Position = box.Position - Vector2.new(1, 1)
 					outline.Visible = true
 	
 					boxes[plr] = pair
@@ -1717,27 +1724,26 @@ local script = G2L["3d"];
 		end
 	end
 	
-	-- // LOOP DE ATUALIZAÇÃO
+	-- Loop principal
 	RunService.RenderStepped:Connect(function()
 		if ativo then
 			atualizarBoxes()
 		end
 	end)
 	
-	-- // EVENTO: Clique no botão (toggle)
+	-- Toggle
 	bt.MouseButton1Click:Connect(function()
 		click:Play()
 		ativo = not ativo
-	
 		if ativo then
-			bt.BackgroundTransparency = 0.35 -- Ativo
+			bt.BackgroundTransparency = 0.35
 		else
-			bt.BackgroundTransparency = 1 -- Desativo
+			bt.BackgroundTransparency = 1
 			removerBoxes()
 		end
 	end)
 	
-	-- // LIMPAR QUANDO JOGADOR SAIR
+	-- Limpeza ao sair do jogador
 	Players.PlayerRemoving:Connect(function(plr)
 		if boxes[plr] then
 			boxes[plr].Box:Remove()
@@ -1782,7 +1788,7 @@ local script = G2L["46"];
 	end)
 end;
 task.spawn(C_46);
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.KeyBoxAim.LocalScript
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.KeyBoxAim.Aimbot
 local function C_4a()
 local script = G2L["4a"];
 	-- scripted by jvttatsu --
