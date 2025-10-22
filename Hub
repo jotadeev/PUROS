@@ -1878,7 +1878,7 @@ local script = G2L["4a"];
 	local holding = false
 	local focusConnection
 	
-	local smoothTime = 0.03 -- segundos para suavização
+	local smoothTime = 0.05 -- segundos para suavização
 	
 	-- Normaliza input do TextBox (ex: "RMB" -> "mousebutton2")
 	local function normalizeKeyFromText(text)
