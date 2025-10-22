@@ -1174,11 +1174,15 @@ task.spawn(C_17);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option1.Check.CheckButton.ESP
 local function C_20()
 local script = G2L["20"];
+	-- scripted by jvttatsu --
 	
+	-- Serviços
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
-	
 	local player = Players.LocalPlayer
+	local camera = workspace.CurrentCamera
+	
+	-- GUI
 	local bt = script.Parent
 	local cc = script.Parent.Parent.Parent:WaitForChild("ChangeColor")
 	local ln = script.Parent.Parent.Parent.Parent.Line
@@ -1186,11 +1190,14 @@ local script = G2L["20"];
 	local health = script.Parent.Parent.Parent.Parent.Option3
 	local box = script.Parent.Parent.Parent.Parent.Option4
 	
+	-- Som
 	local sounds = script.Parent.Parent.Parent.Parent.Parent.Parent.Parent:WaitForChild("Sounds")
 	local click = sounds:WaitForChild("Click")
 	
+	-- Configurações
 	local espAtivo = false
 	local linhas = {} -- [player] = {line1, line2, ...}
+	_G.ESPCor = _G.ESPCor or Color3.fromRGB(255, 255, 255) -- Cor padrão: branca
 	
 	local conexoes = {
 		{"Head", "UpperTorso"},
@@ -1209,17 +1216,17 @@ local script = G2L["20"];
 		{"RightLowerLeg", "RightFoot"},
 	}
 	
-	-- Cria uma linha
+	-- Função para criar linha
 	local function criarLinha()
 		local line = Drawing.new("Line")
-		line.Color = _G.ESPCor or Color3.fromRGB(0, 255, 255)
+		line.Color = _G.ESPCor
 		line.Thickness = 2
 		line.Transparency = 1
 		line.Visible = false
 		return line
 	end
 	
-	-- Cria ESP para jogador, garantindo persistência em respawns
+	-- Cria ESP para jogador (com suporte a respawn e morte)
 	local function criarESPParaJogador(plr)
 		if plr == player then return end
 		if plr.Team and player.Team and plr.Team == player.Team then return end
@@ -1231,56 +1238,59 @@ local script = G2L["20"];
 			linhas[plr][i] = criarLinha()
 		end
 	
-		-- Conecta respawn
+		-- Controle de respawn e morte
 		plr.CharacterAdded:Connect(function(char)
-			-- Esconde linhas temporariamente até o humanoid existir
-			for _, line in pairs(linhas[plr]) do
-				line.Visible = false
+			local humanoid = char:WaitForChild("Humanoid", 10)
+			if humanoid then
+				humanoid.Died:Connect(function()
+					if linhas[plr] then
+						for _, line in pairs(linhas[plr]) do
+							line.Visible = false
+						end
+					end
+				end)
 			end
-	
-			local humanoid = char:WaitForChild("Humanoid")
-			humanoid.Died:Connect(function()
-				for _, line in pairs(linhas[plr]) do
-					line.Visible = false
-				end
-			end)
 		end)
 	end
 	
+	-- Ativa ESP para todos os jogadores atuais
 	local function ativarESP()
 		for _, plr in ipairs(Players:GetPlayers()) do
 			criarESPParaJogador(plr)
 		end
 	end
 	
+	-- Desativa e limpa ESP
 	local function desativarESP()
 		for _, linhaTable in pairs(linhas) do
 			for _, line in pairs(linhaTable) do
 				line:Remove()
 			end
 		end
-		linhas = {}
+		table.clear(linhas)
 	end
 	
+	-- Atualiza linhas
 	local function atualizarESP()
-		local cam = workspace.CurrentCamera
 		for target, linhaTable in pairs(linhas) do
 			local char = target.Character
-			if char and target.Team ~= player.Team and char:FindFirstChildOfClass("Humanoid") and char:FindFirstChild("Head") then
+			if char and target.Team ~= player.Team then
 				local humanoid = char:FindFirstChildOfClass("Humanoid")
-				if humanoid.Health > 0 then
+				if humanoid and humanoid.Health > 0 then
 					for i, conn in ipairs(conexoes) do
 						local part0 = char:FindFirstChild(conn[1])
 						local part1 = char:FindFirstChild(conn[2])
 						local line = linhaTable[i]
 						if part0 and part1 then
-							local pos0, vis0 = cam:WorldToViewportPoint(part0.Position)
-							local pos1, vis1 = cam:WorldToViewportPoint(part1.Position)
-							line.Visible = vis0 and vis1
-							if line.Visible then
+							local pos0, vis0 = camera:WorldToViewportPoint(part0.Position)
+							local pos1, vis1 = camera:WorldToViewportPoint(part1.Position)
+							if vis0 and vis1 then
 								line.From = Vector2.new(pos0.X, pos0.Y)
 								line.To = Vector2.new(pos1.X, pos1.Y)
-								line.Color = _G.ESPCor or Color3.fromRGB(0, 255, 255)
+								line.Color = _G.ESPCor
+								line.Visible = true
+							else
+								line.Visible = false
 							end
 						else
 							line.Visible = false
@@ -1299,7 +1309,7 @@ local script = G2L["20"];
 		end
 	end
 	
-	-- Botão toggle ESP
+	-- Botão Toggle
 	bt.MouseButton1Click:Connect(function()
 		click:Play()
 		espAtivo = not espAtivo
@@ -1326,14 +1336,14 @@ local script = G2L["20"];
 		end
 	end)
 	
-	-- Adiciona ESP para jogadores que entrarem
+	-- Jogadores novos entram
 	Players.PlayerAdded:Connect(function(plr)
 		if espAtivo then
 			criarESPParaJogador(plr)
 		end
 	end)
 	
-	-- Remove ESP de jogadores que saírem
+	-- Jogadores saem
 	Players.PlayerRemoving:Connect(function(plr)
 		if linhas[plr] then
 			for _, line in pairs(linhas[plr]) do
@@ -1525,13 +1535,13 @@ local script = G2L["36"];
 	
 	-- Dimensões e posição
 	local larguraBarra = 3
-	local offsetX = -10 -- distância da esquerda da box
+	local offsetX = -25 -- distância da esquerda da box
 	
 	-- Cria barra de HP + outline
 	local function criarBarra()
 		local outline = Drawing.new("Square")
 		outline.Color = Color3.fromRGB(0, 0, 0)
-		outline.Thickness = 1.5
+		outline.Thickness = 0.75
 		outline.Filled = false
 		outline.Visible = false
 	
@@ -1663,7 +1673,7 @@ local script = G2L["3d"];
 	local function criarBox()
 		local outline = Drawing.new("Square")
 		outline.Color = Color3.fromRGB(0, 0, 0)
-		outline.Thickness = 2
+		outline.Thickness = 1.5
 		outline.Filled = false
 		outline.Visible = false
 	
