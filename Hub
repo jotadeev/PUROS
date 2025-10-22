@@ -763,9 +763,7 @@ G2L["49"]["Color"] = Color3.fromRGB(60, 60, 60);
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.KeyBoxAim.Aimbot
 G2L["4a"] = Instance.new("LocalScript", G2L["48"]);
-G2L["4a"]["Enabled"] = false;
 G2L["4a"]["Name"] = [[Aimbot]];
-G2L["4a"]["Disabled"] = true;
 
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Topbar
@@ -1176,7 +1174,6 @@ task.spawn(C_17);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option1.Check.CheckButton.ESP
 local function C_20()
 local script = G2L["20"];
-	-- scripted by jvttatsu --
 	
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
@@ -1397,7 +1394,7 @@ task.spawn(C_25);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option2.HeadDot.Check.CheckButton.HdDot
 local function C_2e()
 local script = G2L["2e"];
-	-- scripted by jvttatsu --
+	-- Head Dot fixo na tela (não muda com distância)
 	
 	-- // SERVIÇOS
 	local Players = game:GetService("Players")
@@ -1406,7 +1403,7 @@ local script = G2L["2e"];
 	
 	-- // VARIÁVEIS
 	local player = Players.LocalPlayer
-	local bt = script.Parent  -- botão real (TextButton, não Frame)
+	local bt = script.Parent -- botão real (TextButton, não Frame)
 	
 	-- // SONS
 	local sounds = script:FindFirstAncestorWhichIsA("ScreenGui"):WaitForChild("Sounds")
@@ -1416,12 +1413,15 @@ local script = G2L["2e"];
 	local ativo = false
 	local circulos = {}
 	
+	-- // TAMANHO FIXO DO CÍRCULO
+	local raioFixo = 8 -- tamanho fixo do ponto na cabeça (em pixels)
+	
 	-- // FUNÇÃO: Criar círculo branco
 	local function criarCirculo()
 		local circle = Drawing.new("Circle")
-		circle.Color = Color3.fromRGB(255, 255, 255) -- Branco
+		circle.Color = Color3.fromRGB(255, 255, 255)
 		circle.Thickness = 1.5
-		circle.Radius = 10 -- valor inicial, será ajustado dinamicamente
+		circle.Radius = raioFixo
 		circle.NumSides = 32
 		circle.Filled = false
 		circle.Visible = false
@@ -1447,17 +1447,11 @@ local script = G2L["2e"];
 				if char and char:FindFirstChild("Head") and char:FindFirstChildOfClass("Humanoid") then
 					local head = char.Head
 					local humanoid = char:FindFirstChildOfClass("Humanoid")
+	
 					if humanoid.Health > 0 then
 						local pos, visivel = camera:WorldToViewportPoint(head.Position)
 						if visivel then
 							local circle = circulos[plr] or criarCirculo()
-	
-							-- Tamanho baseado no tamanho da cabeça
-							local sizeFactor = (head.Size.X + head.Size.Y + head.Size.Z) / 3 -- média do tamanho da Head
-							local radius = sizeFactor * 10 -- ajustar fator para visual correto
-							circle.Radius = radius
-	
-							-- Posicionar no centro da cabeça
 							circle.Position = Vector2.new(pos.X, pos.Y)
 							circle.Visible = true
 							circulos[plr] = circle
@@ -1489,10 +1483,10 @@ local script = G2L["2e"];
 		ativo = not ativo
 	
 		if ativo then
-			bt.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- fundo branco ativo
+			bt.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			bt.BackgroundTransparency = 0
 		else
-			bt.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- fundo preto desativado
+			bt.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 			bt.BackgroundTransparency = 1
 			removerCirculos()
 		end
@@ -1511,7 +1505,7 @@ task.spawn(C_2e);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option3.Health.Check.CheckButton.Health
 local function C_36()
 local script = G2L["36"];
-	-- scripted by jvttatsu --
+	
 	-- Barra de HP vertical, fina, lado esquerdo do personagem, tamanho fixo na tela
 	
 	local Players = game:GetService("Players")
@@ -1587,16 +1581,16 @@ local script = G2L["36"];
 					local hpPercent = humanoid.Health / humanoid.MaxHealth
 					local alturaAtual = math.clamp(alturaBarra * hpPercent, 2, alturaBarra)
 	
-					-- Calcula posição fixa ao lado esquerdo do personagem
+					-- Posição fixa na tela
 					local x = pos.X + offsetX
 					local y = pos.Y - (alturaBarra / 2)
 	
-					-- Outline da barra
+					-- Outline da barra (tamanho fixo)
 					outline.Size = Vector2.new(larguraBarra + 1, alturaBarra + 1)
 					outline.Position = Vector2.new(x - 0.5, y - 0.5)
 					outline.Visible = true
 	
-					-- Barra verde
+					-- Barra verde (altura proporcional ao HP, fixa na tela)
 					bar.Size = Vector2.new(larguraBarra, alturaAtual)
 					bar.Position = Vector2.new(x, y + (alturaBarra - alturaAtual))
 					bar.Visible = true
@@ -1646,7 +1640,6 @@ task.spawn(C_36);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option4.Box.Check.CheckButton.Box
 local function C_3d()
 local script = G2L["3d"];
-	-- scripted by jvttatsu --
 	-- Box ESP ajustada à hitbox do personagem, tamanho fixo na tela
 	
 	local Players = game:GetService("Players")
@@ -1711,17 +1704,23 @@ local script = G2L["3d"];
 					continue
 				end
 	
+				-- Posição da box na tela
 				local pos, visivel = camera:WorldToViewportPoint(hrp.Position)
 				if visivel then
 					local pair = boxes[plr] or criarBox()
 					local box = pair.Box
 					local outline = pair.Outline
 	
-					-- Tamanho fixo baseado na hitbox padrão do Roblox
+					-- Posição fixa (sem depender da distância)
+					local x = pos.X - (larguraBox / 2)
+					local y = pos.Y - (alturaBox / 2)
+	
+					-- Box principal
 					box.Size = Vector2.new(larguraBox, alturaBox)
-					box.Position = Vector2.new(pos.X - larguraBox / 2, pos.Y - alturaBox / 2)
+					box.Position = Vector2.new(x, y)
 					box.Visible = true
 	
+					-- Outline da box
 					outline.Size = box.Size + Vector2.new(2, 2)
 					outline.Position = box.Position - Vector2.new(1, 1)
 					outline.Visible = true
@@ -1799,6 +1798,177 @@ local script = G2L["46"];
 	end)
 end;
 task.spawn(C_46);
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.KeyBoxAim.Aimbot
+local function C_4a()
+local script = G2L["4a"];
+	
+	-- Aimbot robusto: pega inimigos do outro time, suavizado, sem raycast, LMB desativado
+	
+	local UIS = game:GetService("UserInputService")
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	local camera = workspace.CurrentCamera
+	
+	local player = Players.LocalPlayer
+	local textBox = script.Parent
+	
+	
+	
+	local aimbotKey = nil
+	local holding = false
+	local focusConnection
+	
+	local smoothTime = 0.05 -- segundos para suavização
+	
+	-- Normaliza input do TextBox (ex: "RMB" -> "mousebutton2")
+	local function normalizeKeyFromText(text)
+		if not text then return nil, "" end
+		text = text:lower():gsub("%s+", "")
+		if text == "lmb" or text == "mousebutton1" or text == "mouse1" then
+			return nil, "" -- LMB desativado
+		elseif text == "rmb" or text == "mousebutton2" or text == "mouse2" then
+			return "mousebutton2", "RMB"
+		elseif text == "mmb" or text == "mousebutton3" or text == "mouse3" then
+			return "mousebutton3", "MMB"
+		else
+			if #text >= 1 then
+				return text, text:upper()
+			end
+		end
+		return nil, ""
+	end
+	
+	-- Normaliza InputObject
+	local function normalizeKeyFromInput(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			return nil, "" -- LMB desativado
+		elseif input.UserInputType == Enum.UserInputType.MouseButton2 then
+			return "mousebutton2", "RMB"
+		elseif input.UserInputType == Enum.UserInputType.MouseButton3 then
+			return "mousebutton3", "MMB"
+		elseif input.UserInputType == Enum.UserInputType.Keyboard then
+			local codeName = input.KeyCode and input.KeyCode.Name
+			if codeName then
+				return codeName:lower(), codeName:upper()
+			end
+		end
+		return nil, ""
+	end
+	
+	-- Ao perder foco
+	textBox.FocusLost:Connect(function(enterPressed)
+		if focusConnection then
+			focusConnection:Disconnect()
+			focusConnection = nil
+		end
+		if not enterPressed then return end
+		local normalized, display = normalizeKeyFromText(textBox.Text)
+		if normalized then
+			aimbotKey = normalized
+			textBox.Text = "Key: " .. (display or normalized:upper())
+		else
+			textBox.Text = "Key: ?"
+		end
+	end)
+	
+	-- Ao focar: captura qualquer tecla ou mouse (exceto LMB)
+	textBox.Focused:Connect(function()
+		if focusConnection then
+			focusConnection:Disconnect()
+		end
+		focusConnection = UIS.InputBegan:Connect(function(input, processed)
+			if not textBox:IsFocused() then return end
+			local normalized, display = normalizeKeyFromInput(input)
+			if normalized then
+				aimbotKey = normalized
+				textBox.Text = "Key: " .. (display or normalized:upper())
+				textBox:ReleaseFocus()
+				if focusConnection then
+					focusConnection:Disconnect()
+					focusConnection = nil
+				end
+			end
+		end)
+	end)
+	
+	-- Helper: converte InputObject em nome interno
+	local function getInputName(input)
+		if input.UserInputType == Enum.UserInputType.Keyboard then
+			return input.KeyCode and input.KeyCode.Name and input.KeyCode.Name:lower() or nil
+		elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+			return nil -- LMB desativado
+		elseif input.UserInputType == Enum.UserInputType.MouseButton2 then
+			return "mousebutton2"
+		elseif input.UserInputType == Enum.UserInputType.MouseButton3 then
+			return "mousebutton3"
+		end
+		return nil
+	end
+	
+	-- InputBegan / InputEnded para holding
+	UIS.InputBegan:Connect(function(input, processed)
+		if not aimbotKey then return end
+		local name = getInputName(input)
+		if name == aimbotKey then
+			-- ignora clique processado pela GUI
+			if (name == "mousebutton2" or name == "mousebutton3") and processed then return end
+			holding = true
+		end
+	end)
+	
+	UIS.InputEnded:Connect(function(input, processed)
+		if not aimbotKey then return end
+		local name = getInputName(input)
+		if name == aimbotKey then
+			holding = false
+		end
+	end)
+	
+	-- Pega inimigo mais próximo do centro
+	local function getClosestEnemyToCenter()
+		local cam = camera
+		local center = Vector2.new(cam.ViewportSize.X / 2, cam.ViewportSize.Y / 2)
+		local closestPlayer = nil
+		local closestDistance = math.huge
+	
+		for _, plr in pairs(Players:GetPlayers()) do
+			if plr ~= player and plr.Team ~= player.Team and plr.Character and plr.Character:FindFirstChild("Head") then
+				local head = plr.Character.Head
+				local headPos, onScreen = cam:WorldToViewportPoint(head.Position)
+				if onScreen then
+					local screenPos = Vector2.new(headPos.X, headPos.Y)
+					local dist = (screenPos - center).Magnitude
+					if dist < closestDistance then
+						closestDistance = dist
+						closestPlayer = plr
+					end
+				end
+			end
+		end
+		return closestPlayer
+	end
+	
+	-- Suavização
+	local function smoothAim(current, target, alpha)
+		return current:Lerp(target, alpha)
+	end
+	
+	-- Loop principal
+	RunService.RenderStepped:Connect(function(dt)
+		if not holding then return end
+		local targetPlayer = getClosestEnemyToCenter()
+		if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("Head") then
+			local head = targetPlayer.Character.Head
+			local cam = camera
+			local dir = (head.Position - cam.CFrame.Position).Unit
+			local targetCFrame = CFrame.new(cam.CFrame.Position, cam.CFrame.Position + dir)
+			local alpha = math.clamp(dt / smoothTime, 0, 1)
+			camera.CFrame = smoothAim(cam.CFrame, targetCFrame, alpha)
+		end
+	end)
+	
+end;
+task.spawn(C_4a);
 -- StarterGui.UIPuros.MainFrame.Buttons.MainButton.MainBScript
 local function C_50()
 local script = G2L["50"];
