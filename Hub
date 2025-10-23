@@ -1226,7 +1226,7 @@ G2L["79"]["TextSize"] = 14;
 G2L["79"]["TextScaled"] = true;
 G2L["79"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["79"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
-G2L["79"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["79"]["TextColor3"] = Color3.fromRGB(0, 255, 61);
 G2L["79"]["BackgroundTransparency"] = 1;
 G2L["79"]["Size"] = UDim2.new(0, 146, 0, 20);
 G2L["79"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
@@ -2869,21 +2869,24 @@ local script = G2L["8e"];
 	local player = Players.LocalPlayer
 	local camera = workspace.CurrentCamera
 	
-	local textBox = script.Parent -- supondo que o LocalScript esteja dentro do TextBox
+	local textBox = script.Parent -- LocalScript está dentro do TextBox
+	local minFOV = 70
+	local maxFOV = 120
 	
-	-- Função para alterar o FOV
+	-- Função para atualizar o FOV
 	local function updateFOV()
-		local value = tonumber(textBox.Text) -- converte o texto para número
-		if value and value >= 70 and value <= 120 then
+		local value = tonumber(textBox.Text)
+		if value then
+			-- Garante que o valor fique entre 70 e 120
+			value = math.clamp(value, minFOV, maxFOV)
 			camera.FieldOfView = value
-		else
-			-- Opcional: resetar para o FOV padrão ou mostrar aviso
-			-- camera.FieldOfView = 70
-			-- print("Digite um valor entre 70 e 120")
 		end
 	end
 	
-	-- Conecta a função ao evento de alteração do TextBox
+	-- Atualiza o FOV enquanto o jogador digita
+	textBox:GetPropertyChangedSignal("Text"):Connect(updateFOV)
+	
+	-- Opcional: Atualiza quando pressiona Enter (para quem prefere confirmar)
 	textBox.FocusLost:Connect(function(enterPressed)
 		if enterPressed then
 			updateFOV()
