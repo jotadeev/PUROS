@@ -7,7 +7,7 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
 ]=]
 
--- Instances: 152 | Scripts: 23 | Modules: 0 | Tags: 0
+-- Instances: 151 | Scripts: 23 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.UIPuros
@@ -1505,20 +1505,9 @@ G2L["96"] = Instance.new("LocalScript", G2L["1"]);
 G2L["96"]["Name"] = [[OpenClose]];
 
 
--- StarterGui.UIPuros.Shiverfrost
-G2L["97"] = Instance.new("Sky", G2L["1"]);
-G2L["97"]["SkyboxUp"] = [[rbxassetid://11941773718]];
-G2L["97"]["SkyboxBk"] = [[rbxassetid://11941775243]];
-G2L["97"]["SkyboxDn"] = [[rbxassetid://11941774975]];
-G2L["97"]["SkyboxFt"] = [[rbxassetid://11941774655]];
-G2L["97"]["Name"] = [[Shiverfrost]];
-G2L["97"]["SkyboxLf"] = [[rbxassetid://11941774369]];
-G2L["97"]["SkyboxRt"] = [[rbxassetid://11941774042]];
-
-
 -- StarterGui.UIPuros.Sky
-G2L["98"] = Instance.new("LocalScript", G2L["1"]);
-G2L["98"]["Name"] = [[Sky]];
+G2L["97"] = Instance.new("LocalScript", G2L["1"]);
+G2L["97"]["Name"] = [[Sky]];
 
 
 -- StarterGui.UIPuros.Open.OpenScript
@@ -2754,14 +2743,38 @@ local script = G2L["96"];
 end;
 task.spawn(C_96);
 -- StarterGui.UIPuros.Sky
-local function C_98()
-local script = G2L["98"];
-	local skyverde = script.Parent.Shiverfrost
-	local skynormal = game.Lighting.Sky
+local function C_97()
+local script = G2L["97"];
 	
-	skynormal:Destroy()
-	skyverde.Parent = game.Lighting
+	
+	-- IDs da nova Skybox
+	local skyboxIds = {
+		Back = "rbxassetid://11941775243",
+		Down = "rbxassetid://11941774975",
+		Front = "rbxassetid://11941774655",
+		Left = "rbxassetid://11941774369",
+		Right = "rbxassetid://11941774042",
+		Up = "rbxassetid://11941773718"
+	}
+	
+	-- Função para trocar todos os IDs da Skybox
+	local function changeSkybox()
+		-- Procura todos os objetos Sky (Skybox) no jogo
+		for _, sky in pairs(game.Lighting:GetChildren()) do
+			if sky:IsA("Sky") then
+				sky.SkyboxBk = skyboxIds.Back
+				sky.SkyboxDn = skyboxIds.Down
+				sky.SkyboxFt = skyboxIds.Front
+				sky.SkyboxLf = skyboxIds.Left
+				sky.SkyboxRt = skyboxIds.Right
+				sky.SkyboxUp = skyboxIds.Up
+			end
+		end
+	end
+	
+	changeSkybox()
+	
 end;
-task.spawn(C_98);
+task.spawn(C_97);
 
 return G2L["1"], require;
