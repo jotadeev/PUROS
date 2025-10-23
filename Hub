@@ -1425,7 +1425,6 @@ G2L["8b"]["BackgroundTransparency"] = 0.99;
 
 -- StarterGui.UIPuros.MainFrame.Misc.MiscFrame.Option3.Fov.FovBox
 G2L["8c"] = Instance.new("TextBox", G2L["8b"]);
-G2L["8c"]["CursorPosition"] = -1;
 G2L["8c"]["Name"] = [[FovBox]];
 G2L["8c"]["BorderSizePixel"] = 0;
 G2L["8c"]["TextWrapped"] = true;
@@ -2856,4 +2855,67 @@ local script = G2L["86"];
 		click:Play()
 		BotaoClicado = not BotaoClicado 
 	
-		smb.Visible = BotaoClica
+		smb.Visible = BotaoClicado
+		bt.BackgroundTransparency = BotaoClicado and 0.35 or 1
+	end)
+	
+end;
+task.spawn(C_86);
+-- StarterGui.UIPuros.MainFrame.Misc.MiscFrame.Option3.Fov.FovBox.Fov
+local function C_8e()
+local script = G2L["8e"];
+	-- LocalScript dentro do TextBox
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	local camera = workspace.CurrentCamera
+	
+	local textBox = script.Parent -- supondo que o LocalScript esteja dentro do TextBox
+	
+	-- Função para alterar o FOV
+	local function updateFOV()
+		local value = tonumber(textBox.Text) -- converte o texto para número
+		if value and value >= 70 and value <= 120 then
+			camera.FieldOfView = value
+		else
+			-- Opcional: resetar para o FOV padrão ou mostrar aviso
+			-- camera.FieldOfView = 70
+			-- print("Digite um valor entre 70 e 120")
+		end
+	end
+	
+	-- Conecta a função ao evento de alteração do TextBox
+	textBox.FocusLost:Connect(function(enterPressed)
+		if enterPressed then
+			updateFOV()
+		end
+	end)
+	
+end;
+task.spawn(C_8e);
+-- StarterGui.UIPuros.Topbar.Plr.LocalScript
+local function C_9b()
+local script = G2L["9b"];
+	local plr = game:GetService("Players").LocalPlayer
+	local txt = script.Parent
+	
+	txt.Text = "@" .. plr.DisplayName
+	
+end;
+task.spawn(C_9b);
+-- StarterGui.UIPuros.OpenClose
+local function C_a1()
+local script = G2L["a1"];
+	-- LocalScript (UIPuros > OpenClose)
+	local uis = game:GetService("UserInputService")
+	local main = script.Parent:WaitForChild("MainFrame")
+	
+	uis.InputBegan:Connect(function(input, gp)
+		if gp then return end
+		if input.KeyCode == Enum.KeyCode.RightAlt then
+			main.Visible = not main.Visible -- alterna entre true e false
+		end
+	end)
+end;
+task.spawn(C_a1);
+
+return G2L["1"], require;
