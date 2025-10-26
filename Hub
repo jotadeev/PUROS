@@ -1589,7 +1589,7 @@ G2L["9f"]["TextScaled"] = true;
 G2L["9f"]["BackgroundColor3"] = Color3.fromRGB(21, 21, 21);
 G2L["9f"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["9f"]["PlaceholderText"] = [[Insert your key here]];
-G2L["9f"]["Size"] = UDim2.new(0, 145, 0, 17);
+G2L["9f"]["Size"] = UDim2.new(0.52257, 0, 0.09188, 0);
 G2L["9f"]["Position"] = UDim2.new(0.25332, 0, 0.36982, 0);
 G2L["9f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["9f"]["Text"] = [[]];
@@ -2947,32 +2947,67 @@ task.spawn(C_96);
 -- StarterGui.UIPuros.Key.Main.KeyBox.KeyScript
 local function C_a1()
 local script = G2L["a1"];
-	-- Key System
+	-- Key System by Player
 	local kbox = script.Parent
 	local LoadBt = script.Parent.Parent.Load
 	local UI = script.Parent.Parent.Parent.Parent.MainFrame
 	local title = script.Parent.Parent.Title
-	--
 	
+	-- Lista de keys vinculadas a jogadores
+	local playerKeys = {
+		-- OWNER Key
+		["JxtaCB"] = "OWNERKEY1", -- Perm
+		["aspaszxt"] = "TESTERKEY1", -- Perm
+		
+		-- TESTER Key
+		["vylurean"] = "7lFeJseIqYzYxp",
+	
+		-- 1-DAY Key
+		
+	}
+	
+	-- Limpa o TextBox ao focar
 	kbox.Focused:Connect(function()
 		kbox.Text = ""
 	end)
 	
+	-- Verifica key ao perder o foco
 	kbox.FocusLost:Connect(function()
-		if kbox.Text == "KEY15" then
+		local inputKey = kbox.Text:upper() -- ignora maiúsculas/minúsculas
+		local userNick = game.Players.LocalPlayer.Name
+		local correctKey = playerKeys[userNick]
+	
+		if correctKey and inputKey == correctKey then
+			-- Key correta do jogador
 			LoadBt.Visible = true
+			title.Text = "Key Accepted"
 		else
-			title.Text = "Wrong Key"
-			task.wait(3)
+			-- Verifica se a key existe mas é de outro jogador
+			local keyUsedByAnother = false
+			for nick, key in pairs(playerKeys) do
+				if inputKey == key then
+					keyUsedByAnother = true
+					break
+				end
+			end
+	
+			if keyUsedByAnother then
+				title.Text = "Use only your key."
+			else
+				title.Text = "Inexistent Key."
+			end
+	
+			task.wait(2)
 			title.Text = "Key"
 		end
 	end)
 	
-	--
+	-- Carrega a UI quando clica no botão
 	LoadBt.Activated:Connect(function()
 		UI.Visible = true
 		script.Parent.Parent.Parent:Destroy()
 	end)
+	
 end;
 task.spawn(C_a1);
 -- StarterGui.UIPuros.LocalScript
