@@ -1504,9 +1504,9 @@ G2L["95"]["CornerRadius"] = UDim.new(0, 6);
 
 -- StarterGui.UIPuros.OpenClose
 G2L["96"] = Instance.new("LocalScript", G2L["1"]);
-G2L["96"]["Enabled"] = false;
+G2L["96"]["Enabled"] = true;
 G2L["96"]["Name"] = [[OpenClose]];
-G2L["96"]["Disabled"] = true;
+G2L["96"]["Disabled"] = false;
 
 
 -- StarterGui.UIPuros.Key
