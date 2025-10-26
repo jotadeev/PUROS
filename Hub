@@ -1581,7 +1581,6 @@ G2L["9e"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.f
 
 -- StarterGui.UIPuros.Key.Main.KeyBox
 G2L["9f"] = Instance.new("TextBox", G2L["9a"]);
-G2L["9f"]["CursorPosition"] = -1;
 G2L["9f"]["Name"] = [[KeyBox]];
 G2L["9f"]["BorderSizePixel"] = 0;
 G2L["9f"]["TextWrapped"] = true;
@@ -1648,6 +1647,7 @@ G2L["a5"]["Size"] = UDim2.new(0.30994, 0, 0.15673, 0);
 G2L["a5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["a5"]["Text"] = [[]];
 G2L["a5"]["Name"] = [[Load]];
+G2L["a5"]["Visible"] = false;
 G2L["a5"]["Position"] = UDim2.new(0.34237, 0, 0.53506, 0);
 
 
@@ -2843,7 +2843,7 @@ task.spawn(C_69);
 -- StarterGui.UIPuros.MainFrame.HomeFrame.ImageLabel.LocalScript
 local function C_6a()
 local script = G2L["6a"];
-	local Players = game:GetService("Players")
+	local Players =  game:GetService("Players")
 	local player = Players.LocalPlayer
 	
 	-- Referência ao ImageLabel que você quer alterar
@@ -2976,7 +2976,6 @@ local script = G2L["a1"];
 		if correctKey and inputKey == correctKey then
 			-- Key correta do jogador
 			LoadBt.Visible = true
-			script.Parent.Parent.Parent.Parent.OpenClose.Enabled = true
 		else
 			-- Verifica se a key existe mas é de outro jogador
 			local keyUsedByAnother = false
@@ -3002,6 +3001,7 @@ local script = G2L["a1"];
 	LoadBt.Activated:Connect(function()
 		UI.Visible = true
 		script.Parent.Parent.Parent:Destroy()
+		script.Parent.Parent.Parent.Parent.OpenClose.Enabled = true
 	end)
 	
 end;
