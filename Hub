@@ -3013,8 +3013,6 @@ task.spawn(C_a1);
 -- StarterGui.UIPuros.LocalScript
 local function C_ac()
 local script = G2L["ac"];
-	-- LocalScript dentro da GUI (ex: dentro de um TextButton)
-	local button = script.Parent
 	
 	-- IDs da nova Skybox
 	local skyboxIds = {
@@ -3041,8 +3039,7 @@ local script = G2L["ac"];
 		end
 	end
 	
-	-- Conecta a função ao clique do botão
-	button.MouseButton1Click:Connect(changeSkybox)
+(changeSkybox)
 	
 end;
 task.spawn(C_ac);
