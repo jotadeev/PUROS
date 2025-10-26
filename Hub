@@ -7,7 +7,7 @@
  Y888P  ~Y8888P' Y888888P      888888D      Y88888P ~Y8888P' YP   YP  CONVERTER 
 ]=]
 
--- Instances: 172 | Scripts: 24 | Modules: 0 | Tags: 0
+-- Instances: 174 | Scripts: 24 | Modules: 0 | Tags: 0
 local G2L = {};
 
 -- StarterGui.UIPuros
@@ -1504,7 +1504,9 @@ G2L["95"]["CornerRadius"] = UDim.new(0, 6);
 
 -- StarterGui.UIPuros.OpenClose
 G2L["96"] = Instance.new("LocalScript", G2L["1"]);
+G2L["96"]["Enabled"] = false;
 G2L["96"]["Name"] = [[OpenClose]];
+G2L["96"]["Disabled"] = true;
 
 
 -- StarterGui.UIPuros.Key
@@ -1587,7 +1589,7 @@ G2L["9f"]["TextSize"] = 14;
 G2L["9f"]["TextColor3"] = Color3.fromRGB(41, 187, 0);
 G2L["9f"]["TextScaled"] = true;
 G2L["9f"]["BackgroundColor3"] = Color3.fromRGB(21, 21, 21);
-G2L["9f"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["9f"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Italic);
 G2L["9f"]["PlaceholderText"] = [[Insert your key here]];
 G2L["9f"]["Size"] = UDim2.new(0.52257, 0, 0.09188, 0);
 G2L["9f"]["Position"] = UDim2.new(0.25332, 0, 0.36982, 0);
@@ -1607,109 +1609,118 @@ G2L["a1"] = Instance.new("LocalScript", G2L["9f"]);
 G2L["a1"]["Name"] = [[KeyScript]];
 
 
+-- StarterGui.UIPuros.Key.Main.KeyBox.UICorner
+G2L["a2"] = Instance.new("UICorner", G2L["9f"]);
+G2L["a2"]["CornerRadius"] = UDim.new(0, 4);
+
+
 -- StarterGui.UIPuros.Key.Main.Title
-G2L["a2"] = Instance.new("TextLabel", G2L["9a"]);
-G2L["a2"]["TextWrapped"] = true;
-G2L["a2"]["BorderSizePixel"] = 0;
-G2L["a2"]["TextSize"] = 17;
-G2L["a2"]["TextScaled"] = true;
-G2L["a2"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a2"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.ExtraBold, Enum.FontStyle.Normal);
-G2L["a2"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["a2"]["BackgroundTransparency"] = 1;
-G2L["a2"]["RichText"] = true;
-G2L["a2"]["Size"] = UDim2.new(0.68173, 0, 0.12534, 0);
-G2L["a2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a2"]["Text"] = [[Key]];
-G2L["a2"]["Name"] = [[Title]];
-G2L["a2"]["Position"] = UDim2.new(0.17073, 0, 0.20971, 0);
+G2L["a3"] = Instance.new("TextLabel", G2L["9a"]);
+G2L["a3"]["TextWrapped"] = true;
+G2L["a3"]["BorderSizePixel"] = 0;
+G2L["a3"]["TextSize"] = 17;
+G2L["a3"]["TextScaled"] = true;
+G2L["a3"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a3"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.ExtraBold, Enum.FontStyle.Normal);
+G2L["a3"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["a3"]["BackgroundTransparency"] = 1;
+G2L["a3"]["RichText"] = true;
+G2L["a3"]["Size"] = UDim2.new(0.68173, 0, 0.12534, 0);
+G2L["a3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a3"]["Text"] = [[Key]];
+G2L["a3"]["Name"] = [[Title]];
+G2L["a3"]["Position"] = UDim2.new(0.17073, 0, 0.20971, 0);
 
 
 -- StarterGui.UIPuros.Key.Main.Title.UICorner
-G2L["a3"] = Instance.new("UICorner", G2L["a2"]);
-G2L["a3"]["CornerRadius"] = UDim.new(0, 65);
+G2L["a4"] = Instance.new("UICorner", G2L["a3"]);
+G2L["a4"]["CornerRadius"] = UDim.new(0, 65);
 
 
 -- StarterGui.UIPuros.Key.Main.Load
-G2L["a4"] = Instance.new("TextButton", G2L["9a"]);
-G2L["a4"]["BorderSizePixel"] = 0;
-G2L["a4"]["TextSize"] = 14;
-G2L["a4"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a4"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["a4"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["a4"]["Size"] = UDim2.new(0, 86, 0, 29);
-G2L["a4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a4"]["Text"] = [[]];
-G2L["a4"]["Name"] = [[Load]];
-G2L["a4"]["Visible"] = false;
-G2L["a4"]["Position"] = UDim2.new(0.34237, 0, 0.53506, 0);
+G2L["a5"] = Instance.new("TextButton", G2L["9a"]);
+G2L["a5"]["BorderSizePixel"] = 0;
+G2L["a5"]["TextSize"] = 14;
+G2L["a5"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["a5"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["a5"]["Size"] = UDim2.new(0.30994, 0, 0.15673, 0);
+G2L["a5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a5"]["Text"] = [[]];
+G2L["a5"]["Name"] = [[Load]];
+G2L["a5"]["Position"] = UDim2.new(0.34237, 0, 0.53506, 0);
 
 
 -- StarterGui.UIPuros.Key.Main.Load.UICorner
-G2L["a5"] = Instance.new("UICorner", G2L["a4"]);
+G2L["a6"] = Instance.new("UICorner", G2L["a5"]);
 
 
 
 -- StarterGui.UIPuros.Key.Main.Load.Title
-G2L["a6"] = Instance.new("TextLabel", G2L["a4"]);
-G2L["a6"]["TextWrapped"] = true;
-G2L["a6"]["BorderSizePixel"] = 0;
-G2L["a6"]["TextSize"] = 17;
-G2L["a6"]["TextScaled"] = true;
-G2L["a6"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a6"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Normal);
-G2L["a6"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["a6"]["BackgroundTransparency"] = 1;
-G2L["a6"]["RichText"] = true;
-G2L["a6"]["Size"] = UDim2.new(0.68173, 0, 0.84434, 0);
-G2L["a6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a6"]["Text"] = [[LOAD]];
-G2L["a6"]["Name"] = [[Title]];
-G2L["a6"]["Position"] = UDim2.new(0.17074, 0, 0.15566, 0);
+G2L["a7"] = Instance.new("TextLabel", G2L["a5"]);
+G2L["a7"]["TextWrapped"] = true;
+G2L["a7"]["BorderSizePixel"] = 0;
+G2L["a7"]["TextSize"] = 17;
+G2L["a7"]["TextScaled"] = true;
+G2L["a7"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a7"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Normal);
+G2L["a7"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["a7"]["BackgroundTransparency"] = 1;
+G2L["a7"]["RichText"] = true;
+G2L["a7"]["Size"] = UDim2.new(0.84089, 0, 1, 0);
+G2L["a7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a7"]["Text"] = [[LOAD]];
+G2L["a7"]["Name"] = [[Title]];
+G2L["a7"]["Position"] = UDim2.new(0.07771, 0, -0, 0);
 
 
 -- StarterGui.UIPuros.Key.Main.Load.Title.UICorner
-G2L["a7"] = Instance.new("UICorner", G2L["a6"]);
-G2L["a7"]["CornerRadius"] = UDim.new(0, 65);
+G2L["a8"] = Instance.new("UICorner", G2L["a7"]);
+G2L["a8"]["CornerRadius"] = UDim.new(0, 65);
+
+
+-- StarterGui.UIPuros.Key.Main.Load.Title.UIStroke
+G2L["a9"] = Instance.new("UIStroke", G2L["a7"]);
+
 
 
 -- StarterGui.UIPuros.Key.Main.Load.UIGradient
-G2L["a8"] = Instance.new("UIGradient", G2L["a4"]);
-G2L["a8"]["Rotation"] = 90;
-G2L["a8"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(18, 57, 0)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(43, 133, 0))};
+G2L["aa"] = Instance.new("UIGradient", G2L["a5"]);
+G2L["aa"]["Rotation"] = 90;
+G2L["aa"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.fromRGB(18, 57, 0)),ColorSequenceKeypoint.new(1.000, Color3.fromRGB(43, 133, 0))};
 
 
 -- StarterGui.UIPuros.Key.Main.Title
-G2L["a9"] = Instance.new("TextLabel", G2L["9a"]);
-G2L["a9"]["TextWrapped"] = true;
-G2L["a9"]["BorderSizePixel"] = 0;
-G2L["a9"]["TextSize"] = 17;
-G2L["a9"]["TextScaled"] = true;
-G2L["a9"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a9"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Regular, Enum.FontStyle.Italic);
-G2L["a9"]["TextColor3"] = Color3.fromRGB(198, 198, 198);
-G2L["a9"]["BackgroundTransparency"] = 1;
-G2L["a9"]["RichText"] = true;
-G2L["a9"]["Size"] = UDim2.new(0.9268, 0, 0.0821, 0);
-G2L["a9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["a9"]["Text"] = [[To find the weekly key, join our discord.]];
-G2L["a9"]["Name"] = [[Title]];
-G2L["a9"]["Position"] = UDim2.new(0.0482, 0, 0.94474, 0);
+G2L["ab"] = Instance.new("TextLabel", G2L["9a"]);
+G2L["ab"]["TextWrapped"] = true;
+G2L["ab"]["BorderSizePixel"] = 0;
+G2L["ab"]["TextSize"] = 17;
+G2L["ab"]["TextScaled"] = true;
+G2L["ab"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["ab"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.SemiBold, Enum.FontStyle.Italic);
+G2L["ab"]["TextColor3"] = Color3.fromRGB(198, 198, 198);
+G2L["ab"]["BackgroundTransparency"] = 1;
+G2L["ab"]["RichText"] = true;
+G2L["ab"]["Size"] = UDim2.new(0.30692, 0, 0.17939, 0);
+G2L["ab"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["ab"]["Text"] = [[buy key at puros discord]];
+G2L["ab"]["Name"] = [[Title]];
+G2L["ab"]["Position"] = UDim2.new(0.34733, 0, 0.86367, 0);
 
 
 -- StarterGui.UIPuros.Key.Main.Title.UICorner
-G2L["aa"] = Instance.new("UICorner", G2L["a9"]);
-G2L["aa"]["CornerRadius"] = UDim.new(0, 65);
+G2L["ac"] = Instance.new("UICorner", G2L["ab"]);
+G2L["ac"]["CornerRadius"] = UDim.new(0, 65);
 
 
 -- StarterGui.UIPuros.Key.UICorner
-G2L["ab"] = Instance.new("UICorner", G2L["97"]);
+G2L["ad"] = Instance.new("UICorner", G2L["97"]);
 
 
 
--- StarterGui.UIPuros.LocalScript
-G2L["ac"] = Instance.new("LocalScript", G2L["1"]);
-
+-- StarterGui.UIPuros.SkyScriptr
+G2L["ae"] = Instance.new("LocalScript", G2L["1"]);
+G2L["ae"]["Name"] = [[SkyScriptr]];
 
 
 -- StarterGui.UIPuros.Open.OpenScript
@@ -2929,21 +2940,6 @@ local script = G2L["90"];
 	
 end;
 task.spawn(C_90);
--- StarterGui.UIPuros.OpenClose
-local function C_96()
-local script = G2L["96"];
-	-- LocalScript (UIPuros > OpenClose)
-	local uis = game:GetService("UserInputService")
-	local main = script.Parent:WaitForChild("MainFrame")
-	
-	uis.InputBegan:Connect(function(input, gp)
-		if gp then return end
-		if input.KeyCode == Enum.KeyCode.RightAlt then
-			main.Visible = not main.Visible -- alterna entre true e false
-		end
-	end)
-end;
-task.spawn(C_96);
 -- StarterGui.UIPuros.Key.Main.KeyBox.KeyScript
 local function C_a1()
 local script = G2L["a1"];
@@ -2980,7 +2976,7 @@ local script = G2L["a1"];
 		if correctKey and inputKey == correctKey then
 			-- Key correta do jogador
 			LoadBt.Visible = true
-			title.Text = "Key Accepted"
+			script.Parent.Parent.Parent.Parent.OpenClose.Enabled = true
 		else
 			-- Verifica se a key existe mas é de outro jogador
 			local keyUsedByAnother = false
@@ -3010,9 +3006,10 @@ local script = G2L["a1"];
 	
 end;
 task.spawn(C_a1);
--- StarterGui.UIPuros.LocalScript
-local function C_ac()
-local script = G2L["ac"];
+-- StarterGui.UIPuros.SkyScriptr
+local function C_ae()
+local script = G2L["ae"];
+	
 	
 	-- IDs da nova Skybox
 	local skyboxIds = {
@@ -3039,9 +3036,9 @@ local script = G2L["ac"];
 		end
 	end
 	
-(changeSkybox)
-	
+	-- Conecta a função ao clique do botão
+	changeSkybox()
 end;
-task.spawn(C_ac);
+task.spawn(C_ae);
 
 return G2L["1"], require;
