@@ -1504,9 +1504,7 @@ G2L["95"]["CornerRadius"] = UDim.new(0, 6);
 
 -- StarterGui.UIPuros.OpenClose
 G2L["96"] = Instance.new("LocalScript", G2L["1"]);
-G2L["96"]["Enabled"] = true;
 G2L["96"]["Name"] = [[OpenClose]];
-G2L["96"]["Disabled"] = false;
 
 
 -- StarterGui.UIPuros.Key
@@ -2843,7 +2841,7 @@ task.spawn(C_69);
 -- StarterGui.UIPuros.MainFrame.HomeFrame.ImageLabel.LocalScript
 local function C_6a()
 local script = G2L["6a"];
-	local Players =  game:GetService("Players")
+	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
 	
 	-- Referência ao ImageLabel que você quer alterar
@@ -2940,6 +2938,21 @@ local script = G2L["90"];
 	
 end;
 task.spawn(C_90);
+-- StarterGui.UIPuros.OpenClose
+local function C_96()
+local script = G2L["96"];
+	-- LocalScript (UIPuros > OpenClose)
+	local uis = game:GetService("UserInputService")
+	local main = script.Parent:WaitForChild("MainFrame")
+	
+	uis.InputBegan:Connect(function(input, gp)
+		if gp then return end
+		if input.KeyCode == Enum.KeyCode.RightAlt then
+			main.Visible = not main.Visible -- alterna entre true e false
+		end
+	end)
+end;
+task.spawn(C_96);
 -- StarterGui.UIPuros.Key.Main.KeyBox.KeyScript
 local function C_a1()
 local script = G2L["a1"];
@@ -3001,7 +3014,6 @@ local script = G2L["a1"];
 	LoadBt.Activated:Connect(function()
 		UI.Visible = true
 		script.Parent.Parent.Parent:Destroy()
-		script.Parent.Parent.Parent.Parent.OpenClose.Enabled = true
 	end)
 	
 end;
