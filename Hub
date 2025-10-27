@@ -2969,10 +2969,9 @@ local script = G2L["a1"];
 		["aspaszxt"] = "TESTERKEY1", -- Perm
 		
 		-- TESTER Key
-		["vylurean"] = "7lFeJseIqYzYxp",
-		["seupai_eumorriconfia"] = "oWQB9YJUadXoSAZHBBSN"
+		["vylurean"] = "FwsKdlzEmdAOxj",
+		["seupai_eumorriconfia"] = "wOALzmfQAEdkfGH"
 		-- 1-DAY Key
-		
 	}
 	
 	-- Limpa o TextBox ao focar
