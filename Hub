@@ -894,6 +894,7 @@ G2L["56"]["Position"] = UDim2.new(1.172, 0, -0.05, 0);
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Triggerbot.Check.TriggerBox
 G2L["57"] = Instance.new("TextBox", G2L["52"]);
+G2L["57"]["Visible"] = false;
 G2L["57"]["CursorPosition"] = -1;
 G2L["57"]["Name"] = [[TriggerBox]];
 G2L["57"]["BorderSizePixel"] = 0;
@@ -903,7 +904,7 @@ G2L["57"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["57"]["TextScaled"] = true;
 G2L["57"]["BackgroundColor3"] = Color3.fromRGB(21, 21, 21);
 G2L["57"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["57"]["PlaceholderText"] = [[Firerate [0.05 - 0.45]];
+G2L["57"]["PlaceholderText"] = [[Firerate: 0.05 - 0.45]];
 G2L["57"]["Size"] = UDim2.new(0, 52, 0, 16);
 G2L["57"]["Position"] = UDim2.new(6.15137, 0, 0, 0);
 G2L["57"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
@@ -2805,6 +2806,7 @@ local script = G2L["55"];
 	local click = sounds:WaitForChild("Click")
 	local hover = sounds:WaitForChild("Hover")
 	local woosh = sounds:WaitForChild("Woosh")
+	local trbox = script.Parent.Parent.TriggerBox
 	
 	-- // ESTADO
 	local triggerAtivo = false
@@ -2823,6 +2825,7 @@ local script = G2L["55"];
 	bt.Activated:Connect(function()
 		click:Play()
 		triggerAtivo = not triggerAtivo
+		trbox.Visible = not trbox.Visible
 		bt.BackgroundTransparency = triggerAtivo and 0.35 or 1
 	end)
 	
