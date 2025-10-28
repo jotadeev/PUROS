@@ -2246,9 +2246,14 @@ local script = G2L["22"];
 					if distance <= maxDistance then
 						local pos, onScreen = camera:WorldToViewportPoint(head.Position)
 						if onScreen then
-							-- posição fixa em pixels
+							-- Calcula o raio baseado na distância
+							local scaledRadius = dotRadius * (maxDistance / distance)
+	
+							-- Garante um mínimo e máximo para evitar problemas visuais
+							scaledRadius = math.clamp(scaledRadius, dotRadius, dotRadius * 2)
+	
 							circle.Position = Vector2.new(pos.X, pos.Y)
-							circle.Radius = dotRadius -- tamanho fixo
+							circle.Radius = scaledRadius
 							circle.Visible = true
 						else
 							circle.Visible = false
@@ -2305,7 +2310,6 @@ local script = G2L["22"];
 			dots[plr] = nil
 		end
 	end)
-	
 end;
 task.spawn(C_22);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option3.Health.Check.CheckButton.Health
@@ -2605,10 +2609,10 @@ local script = G2L["3a"];
 		label.Font = Enum.Font.Code
 		label.TextSize = textSize
 		label.Text = plr.DisplayName
-		label.TextScaled = true -- UIScaled
+		label.TextScaled = true -- Mantém o tamanho consistente
 		label.AnchorPoint = Vector2.new(0.5, 1)
 		label.Parent = screenGui
-		label.Size = UDim2.new(0, 100, 0, 20) -- tamanho inicial, ajustável pelo TextScaled
+		label.Size = UDim2.new(0, 100, 0, 20) -- Tamanho inicial ajustável
 	
 		local stroke = Instance.new("UIStroke")
 		stroke.Thickness = 1
@@ -2649,7 +2653,7 @@ local script = G2L["3a"];
 	
 				local pair = labels[plr] or criarLabel(plr)
 	
-				-- posição fixa acima da cabeça (em viewport)
+				-- Posição fixa acima da cabeça usando WorldToViewportPoint
 				local posHead = camera:WorldToViewportPoint(head.Position + Vector3.new(0, offsetY, 0))
 				if posHead.Z > 0 then
 					pair.Label.Position = UDim2.new(0, posHead.X, 0, posHead.Y)
@@ -2686,7 +2690,6 @@ local script = G2L["3a"];
 			labels[plr] = nil
 		end
 	end)
-	
 end;
 task.spawn(C_3a);
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Aimbot.Frame.CheckButton.LocalScript
