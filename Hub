@@ -2771,8 +2771,7 @@ local script = G2L["47"];
 		if v > MAX_SMOOTH then return MAX_SMOOTH end
 		return v
 	end
-
-	SmoothnessValue.Value = clampSmooth(SmoothnessValue.Value)
+SmoothnessValue.Value = clampSmooth(SmoothnessValue.Value)
 	
 	-- variavel local usada no loop (atualizada quando SmoothnessValue mudar)
 	local smoothTime = SmoothnessValue.Value
@@ -3017,10 +3016,8 @@ local script = G2L["5c"];
 	-- // ESTADO
 	local triggerAtivo = false
 	local lastClickTime = 0
-	
-	-- Usando TriggerDebounce existente (não criar novo)
-	local TriggerDebounce = script:WaitForChild("TriggerDebounce")
-	TriggerDebounce.Value = 0.01 -- DEBOUNCE MAIS RÁPIDO (10ms entre tiros)
+	local TriggerDebounce = Instance.new("NumberValue") -- você pode ajustar o valor depois
+	TriggerDebounce.Value = 0.1 -- 0.2 segundos de debounce entre cliques
 	
 	-- // SERVIÇOS
 	local RunService = game:GetService("RunService")
