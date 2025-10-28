@@ -2567,12 +2567,11 @@ task.spawn(C_31);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option5.Name.Check.CheckButton.Names
 local function C_3a()
 local script = G2L["3a"];
-	-- Name ESP acima da cabeça (compacto, largura ajustável, tamanho dinâmico)
+	-- Nome ESP acima da cabeça (compacto, largura ajustável, tamanho dinâmico)
 	
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
 	local camera = workspace.CurrentCamera
-	
 	local player = Players.LocalPlayer
 	local bt = script.Parent
 	
@@ -2583,10 +2582,11 @@ local script = G2L["3a"];
 	-- Config
 	local ativo = false
 	local labels = {}
-	local baseTextSize = 14 -- tamanho base do texto
-	local minTextSize = 10
-	local maxTextSize = 20
-	local padding = 6 -- padding horizontal para o texto
+	local baseTextSize = 14
+	local minTextSize = 12
+	local maxTextSize = 18
+	local padding = 6
+	local offsetY = 1.8 -- distância fixa acima da cabeça (em studs)
 	
 	-- Função para criar TextLabel
 	local function criarLabel(plr)
@@ -2636,19 +2636,21 @@ local script = G2L["3a"];
 					continue
 				end
 	
-				-- distância para escalar o tamanho do texto
-				local distance = (camera.CFrame.Position - head.Position).Magnitude
-				local scale = math.clamp(100 / distance, 0.5, 1.5)
-				local textSize = math.clamp(baseTextSize * scale, minTextSize, maxTextSize)
+				local pair = labels[plr] or criarLabel(plr)
 	
-				local posHead = camera:WorldToViewportPoint(head.Position + Vector3.new(0, 0.45, 0)) -- acima da cabeça
+				-- posição fixa acima da cabeça
+				local posHead = camera:WorldToViewportPoint(head.Position + Vector3.new(0, offsetY, 0))
 				if posHead.Z > 0 then
-					local pair = labels[plr] or criarLabel(plr)
+					-- tamanho dinâmico baseado na distância, mas limitado
+					local distance = (camera.CFrame.Position - head.Position).Magnitude
+					local scale = math.clamp(120 / distance, 0.8, 1.2)
+					local textSize = math.clamp(baseTextSize * scale, minTextSize, maxTextSize)
+	
 					pair.Label.Position = UDim2.new(0, posHead.X, 0, posHead.Y)
 					pair.Label.TextSize = textSize
 					pair.Label.Text = plr.DisplayName
 	
-					-- largura ajustável baseada no texto + padding
+					-- largura ajustável
 					local textBounds = pair.Label.TextBounds
 					pair.Label.Size = UDim2.new(0, textBounds.X + padding, 0, textBounds.Y + 2)
 	
@@ -2771,7 +2773,7 @@ local script = G2L["47"];
 		if v > MAX_SMOOTH then return MAX_SMOOTH end
 		return v
 	end
-SmoothnessValue.Value = clampSmooth(SmoothnessValue.Value)
+	SmoothnessValue.Value = clampSmooth(SmoothnessValue.Value)
 	
 	-- variavel local usada no loop (atualizada quando SmoothnessValue mudar)
 	local smoothTime = SmoothnessValue.Value
