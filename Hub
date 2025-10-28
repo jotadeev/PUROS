@@ -2782,7 +2782,7 @@ local script = G2L["4d"];
 				-- Limita o valor entre 0.025 e 0.5
 				if num < 0.05 then
 					num = 0.05
-				elseif num > 0.45  then
+				elseif num > 0.45 then
 					num = 0.45
 				end
 	
@@ -2879,7 +2879,7 @@ local script = G2L["59"];
 	-- // VARIÁVEIS
 	local player = Players.LocalPlayer
 	local KeyBoxTrigger = script.Parent -- TextBox que vai controlar o debounce do trigger
-	local TriggerScript = script.Parent.Parent.Parent.TriggerFrame -- ajuste se necessário
+	local TriggerScript = script -- ajuste se necessário
 	local TriggerDebounce = TriggerScript:WaitForChild("TriggerDebounce") -- NumberValue dentro do Trigger
 	
 	-- Quando o jogador muda o texto e aperta Enter
