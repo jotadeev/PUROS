@@ -248,7 +248,6 @@ G2L["17"]["Position"] = UDim2.new(0.01593, 0, 0.25509, 0);
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option1.ChangeColor.ColorBox
 G2L["18"] = Instance.new("TextBox", G2L["16"]);
-G2L["18"]["CursorPosition"] = -1;
 G2L["18"]["Name"] = [[ColorBox]];
 G2L["18"]["BorderSizePixel"] = 0;
 G2L["18"]["TextWrapped"] = true;
@@ -2197,7 +2196,9 @@ local script = G2L["22"];
 	
 	-- // CONFIG
 	local ativo = false
-	local dots = {} -- [player] = círculo (Drawing object)
+	local dots = {} -- [player] = Drawing object
+	local maxDistance = 100 -- distância máxima para mostrar o dot
+	local dotRadius = 8 -- tamanho fixo na tela
 	
 	-- // FUNÇÃO: Criar círculo (apenas contorno)
 	local function criarDot()
@@ -2205,7 +2206,7 @@ local script = G2L["22"];
 		circle.Color = Color3.fromRGB(255, 255, 255)
 		circle.Thickness = 1.5
 		circle.NumSides = 30
-		circle.Radius = 8 -- tamanho fixo na tela
+		circle.Radius = dotRadius
 		circle.Filled = false
 		circle.Transparency = 1
 		circle.Visible = false
@@ -2241,13 +2242,17 @@ local script = G2L["22"];
 				local head = char:FindFirstChild("Head")
 				local humanoid = char:FindFirstChildOfClass("Humanoid")
 				if head and humanoid and humanoid.Health > 0 then
-					local pos, onScreen = camera:WorldToViewportPoint(head.Position)
-	
-					if onScreen then
-						-- Posição fixa em pixels
-						circle.Position = Vector2.new(pos.X, pos.Y)
-						circle.Radius = 8 -- tamanho fixo na tela
-						circle.Visible = true
+					local distance = (camera.CFrame.Position - head.Position).Magnitude
+					if distance <= maxDistance then
+						local pos, onScreen = camera:WorldToViewportPoint(head.Position)
+						if onScreen then
+							-- posição fixa em pixels
+							circle.Position = Vector2.new(pos.X, pos.Y)
+							circle.Radius = dotRadius -- tamanho fixo
+							circle.Visible = true
+						else
+							circle.Visible = false
+						end
 					else
 						circle.Visible = false
 					end
@@ -2567,7 +2572,7 @@ task.spawn(C_31);
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option5.Name.Check.CheckButton.Names
 local function C_3a()
 local script = G2L["3a"];
-	-- Nome ESP acima da cabeça (compacto, largura ajustável, tamanho dinâmico)
+	-- Nome ESP acima da cabeça (compacto, largura ajustável, tamanho fixo com UIScaled)
 	
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
@@ -2582,11 +2587,10 @@ local script = G2L["3a"];
 	-- Config
 	local ativo = false
 	local labels = {}
-	local baseTextSize = 14
-	local minTextSize = 12
-	local maxTextSize = 18
+	local textSize = 14
 	local padding = 6
 	local offsetY = 1.8 -- distância fixa acima da cabeça (em studs)
+	local maxDistance = 100 -- distância máxima para mostrar o ESP
 	
 	-- Função para criar TextLabel
 	local function criarLabel(plr)
@@ -2599,11 +2603,12 @@ local script = G2L["3a"];
 		label.BackgroundTransparency = 1
 		label.TextColor3 = Color3.fromRGB(255, 255, 255)
 		label.Font = Enum.Font.Code
-		label.TextSize = baseTextSize
+		label.TextSize = textSize
 		label.Text = plr.DisplayName
-		label.TextScaled = false
+		label.TextScaled = true -- UIScaled
 		label.AnchorPoint = Vector2.new(0.5, 1)
 		label.Parent = screenGui
+		label.Size = UDim2.new(0, 100, 0, 20) -- tamanho inicial, ajustável pelo TextScaled
 	
 		local stroke = Instance.new("UIStroke")
 		stroke.Thickness = 1
@@ -2621,7 +2626,7 @@ local script = G2L["3a"];
 		table.clear(labels)
 	end
 	
-	-- Atualizar posição e tamanho dos labels
+	-- Atualizar visibilidade dos labels
 	local function atualizarLabels()
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Team ~= player.Team and plr.Character then
@@ -2636,28 +2641,22 @@ local script = G2L["3a"];
 					continue
 				end
 	
+				local distance = (camera.CFrame.Position - head.Position).Magnitude
+				if distance > maxDistance then
+					if labels[plr] then labels[plr].Label.Visible = false end
+					continue
+				end
+	
 				local pair = labels[plr] or criarLabel(plr)
 	
-				-- posição fixa acima da cabeça
+				-- posição fixa acima da cabeça (em viewport)
 				local posHead = camera:WorldToViewportPoint(head.Position + Vector3.new(0, offsetY, 0))
 				if posHead.Z > 0 then
-					-- tamanho dinâmico baseado na distância, mas limitado
-					local distance = (camera.CFrame.Position - head.Position).Magnitude
-					local scale = math.clamp(120 / distance, 0.8, 1.2)
-					local textSize = math.clamp(baseTextSize * scale, minTextSize, maxTextSize)
-	
 					pair.Label.Position = UDim2.new(0, posHead.X, 0, posHead.Y)
-					pair.Label.TextSize = textSize
-					pair.Label.Text = plr.DisplayName
-	
-					-- largura ajustável
-					local textBounds = pair.Label.TextBounds
-					pair.Label.Size = UDim2.new(0, textBounds.X + padding, 0, textBounds.Y + 2)
-	
 					pair.Label.Visible = true
 					labels[plr] = pair
-				elseif labels[plr] then
-					labels[plr].Label.Visible = false
+				else
+					if labels[plr] then labels[plr].Label.Visible = false end
 				end
 			elseif labels[plr] then
 				labels[plr].Label.Visible = false
