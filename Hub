@@ -803,93 +803,93 @@ G2L["4d"] = Instance.new("LocalScript", G2L["4b"]);
 G2L["4d"]["Name"] = [[Smoothness]];
 
 
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3
-G2L["4e"] = Instance.new("Frame", G2L["35"]);
-G2L["4e"]["Visible"] = false;
-G2L["4e"]["BorderSizePixel"] = 0;
-G2L["4e"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
-G2L["4e"]["Size"] = UDim2.new(0.95714, 0, 0.09589, 0);
-G2L["4e"]["Position"] = UDim2.new(0.016, 0, 0.48, 0);
-G2L["4e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4e"]["Name"] = [[Option3]];
-G2L["4e"]["BackgroundTransparency"] = 1;
-
-
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Wall
-G2L["4f"] = Instance.new("Frame", G2L["4e"]);
-G2L["4f"]["BorderSizePixel"] = 0;
-G2L["4f"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
-G2L["4f"]["Size"] = UDim2.new(1.04821, 0, -1.37028, 0);
-G2L["4f"]["Position"] = UDim2.new(-0.02, 0, 1.2, 0);
-G2L["4f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4f"]["Name"] = [[Wall]];
-G2L["4f"]["BackgroundTransparency"] = 0.99;
-
-
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Wall.Check
-G2L["50"] = Instance.new("Frame", G2L["4f"]);
-G2L["50"]["BorderSizePixel"] = 0;
-G2L["50"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
-G2L["50"]["Size"] = UDim2.new(0, 19, 0, 16);
-G2L["50"]["Position"] = UDim2.new(0.07, 0, 0.15, 0);
-G2L["50"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["50"]["Name"] = [[Check]];
-
-
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Wall.Check.UIStroke
-G2L["51"] = Instance.new("UIStroke", G2L["50"]);
-G2L["51"]["Color"] = Color3.fromRGB(60, 60, 60);
-
-
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Wall.Check.CheckButton
-G2L["52"] = Instance.new("TextButton", G2L["50"]);
-G2L["52"]["BorderSizePixel"] = 0;
-G2L["52"]["TextSize"] = 14;
-G2L["52"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["52"]["BackgroundColor3"] = Color3.fromRGB(222, 222, 222);
-G2L["52"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["52"]["BackgroundTransparency"] = 1;
-G2L["52"]["Size"] = UDim2.new(0, 19, 0, 16);
-G2L["52"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["52"]["Text"] = [[]];
-G2L["52"]["Name"] = [[CheckButton]];
-G2L["52"]["Position"] = UDim2.new(0.00085, 0, 0, 0);
-
-
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Wall.Check.CheckButton.Wall
-G2L["53"] = Instance.new("LocalScript", G2L["52"]);
-G2L["53"]["Name"] = [[Wall]];
-
-
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Wall.Check.TextLabel
-G2L["54"] = Instance.new("TextLabel", G2L["50"]);
-G2L["54"]["TextWrapped"] = true;
-G2L["54"]["BorderSizePixel"] = 0;
-G2L["54"]["TextSize"] = 14;
-G2L["54"]["TextScaled"] = true;
-G2L["54"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["54"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["54"]["TextColor3"] = Color3.fromRGB(78, 255, 0);
-G2L["54"]["BackgroundTransparency"] = 1;
-G2L["54"]["Size"] = UDim2.new(0, 93, 0, 17);
-G2L["54"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["54"]["Text"] = [[Wall Check]];
-G2L["54"]["Position"] = UDim2.new(1.172, 0, -0.05, 0);
-
-
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.UICorner
-G2L["55"] = Instance.new("UICorner", G2L["35"]);
+G2L["4e"] = Instance.new("UICorner", G2L["35"]);
 
 
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Line
-G2L["56"] = Instance.new("Frame", G2L["35"]);
+G2L["4f"] = Instance.new("Frame", G2L["35"]);
+G2L["4f"]["BorderSizePixel"] = 0;
+G2L["4f"]["BackgroundColor3"] = Color3.fromRGB(60, 60, 60);
+G2L["4f"]["Size"] = UDim2.new(0.99895, 0, -0.01157, 0);
+G2L["4f"]["Position"] = UDim2.new(0, 0, 0.10466, 0);
+G2L["4f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["4f"]["Name"] = [[Line]];
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3
+G2L["50"] = Instance.new("Frame", G2L["35"]);
+G2L["50"]["Visible"] = false;
+G2L["50"]["BorderSizePixel"] = 0;
+G2L["50"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["50"]["Size"] = UDim2.new(0.95714, 0, 0.09589, 0);
+G2L["50"]["Position"] = UDim2.new(0.016, 0, 0.68, 0);
+G2L["50"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["50"]["Name"] = [[Option3]];
+G2L["50"]["BackgroundTransparency"] = 1;
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Triggerbot
+G2L["51"] = Instance.new("Frame", G2L["50"]);
+G2L["51"]["BorderSizePixel"] = 0;
+G2L["51"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["51"]["Size"] = UDim2.new(1.04821, 0, -1.37028, 0);
+G2L["51"]["Position"] = UDim2.new(-0.02, 0, 1.2, 0);
+G2L["51"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["51"]["Name"] = [[Triggerbot]];
+G2L["51"]["BackgroundTransparency"] = 0.99;
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Triggerbot.Check
+G2L["52"] = Instance.new("Frame", G2L["51"]);
+G2L["52"]["BorderSizePixel"] = 0;
+G2L["52"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
+G2L["52"]["Size"] = UDim2.new(0, 19, 0, 16);
+G2L["52"]["Position"] = UDim2.new(0.07, 0, 0.15, 0);
+G2L["52"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["52"]["Name"] = [[Check]];
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Triggerbot.Check.UIStroke
+G2L["53"] = Instance.new("UIStroke", G2L["52"]);
+G2L["53"]["Color"] = Color3.fromRGB(60, 60, 60);
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Triggerbot.Check.CheckButton
+G2L["54"] = Instance.new("TextButton", G2L["52"]);
+G2L["54"]["BorderSizePixel"] = 0;
+G2L["54"]["TextSize"] = 14;
+G2L["54"]["TextColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["54"]["BackgroundColor3"] = Color3.fromRGB(222, 222, 222);
+G2L["54"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["54"]["BackgroundTransparency"] = 1;
+G2L["54"]["Size"] = UDim2.new(0, 19, 0, 16);
+G2L["54"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["54"]["Text"] = [[]];
+G2L["54"]["Name"] = [[CheckButton]];
+G2L["54"]["Position"] = UDim2.new(0.00085, 0, 0, 0);
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Triggerbot.Check.CheckButton.Trigger
+G2L["55"] = Instance.new("LocalScript", G2L["54"]);
+G2L["55"]["Name"] = [[Trigger]];
+
+
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Triggerbot.Check.TextLabel
+G2L["56"] = Instance.new("TextLabel", G2L["52"]);
+G2L["56"]["TextWrapped"] = true;
 G2L["56"]["BorderSizePixel"] = 0;
-G2L["56"]["BackgroundColor3"] = Color3.fromRGB(60, 60, 60);
-G2L["56"]["Size"] = UDim2.new(0.99895, 0, -0.01157, 0);
-G2L["56"]["Position"] = UDim2.new(0, 0, 0.10466, 0);
+G2L["56"]["TextSize"] = 14;
+G2L["56"]["TextScaled"] = true;
+G2L["56"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["56"]["FontFace"] = Font.new([[rbxasset://fonts/families/Nunito.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["56"]["TextColor3"] = Color3.fromRGB(78, 255, 0);
+G2L["56"]["BackgroundTransparency"] = 1;
+G2L["56"]["Size"] = UDim2.new(0, 93, 0, 17);
 G2L["56"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["56"]["Name"] = [[Line]];
+G2L["56"]["Text"] = [[Triggerbot]];
+G2L["56"]["Position"] = UDim2.new(1.172, 0, -0.05, 0);
 
 
 -- StarterGui.UIPuros.MainFrame.Buttons
@@ -2460,6 +2460,7 @@ local script = G2L["3c"];
 	local kb = script.Parent.Parent.KeyBoxAim
 	local sp = script.Parent.Parent.Separador
 	local sm = script.Parent.Parent.Parent.Parent.Option2
+	local tr = script.Parent.Parent.Parent.Parent.Option3
 	-- sons
 	local sounds = script.Parent.Parent.Parent.Parent.Parent.Parent.Parent.Sounds
 	local click = sounds.Click
@@ -2475,12 +2476,14 @@ local script = G2L["3c"];
 			kb.Visible = true
 			sp.Visible = true
 			sm.Visible = true
+			tr.Visible = true
 			bt.BackgroundTransparency = 0.35
 		else
 			BotaoClicado = false
 			kb.Visible = false
 			sp.Visible = false
 			sm.Visible = false
+			tr.Visible = false
 			bt.BackgroundTransparency = 1
 		end
 	end)
@@ -2761,31 +2764,77 @@ local script = G2L["4d"];
 	
 end;
 task.spawn(C_4d);
--- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Wall.Check.CheckButton.Wall
-local function C_53()
-local script = G2L["53"];
-	-- variáveis comuns
+-- StarterGui.UIPuros.MainFrame.Aimbot.Aimbotframe.Option3.Triggerbot.Check.CheckButton.Trigger
+local function C_55()
+local script = G2L["55"];
+	-- // VARIÁVEIS
 	local bt = script.Parent
 	
-	-- sons
+	-- // SONS
 	local sounds = script:FindFirstAncestorWhichIsA("ScreenGui"):WaitForChild("Sounds")
 	local click = sounds:WaitForChild("Click")
 	local hover = sounds:WaitForChild("Hover")
 	local woosh = sounds:WaitForChild("Woosh")
 	
-	-- estado
+	-- // ESTADO
 	local BotaoClicado = false
+	local debounce = false -- evita cliques múltiplos
+	local triggerAtivo = false
 	
-	-- clique do botão
+	-- // FUNÇÃO DE CLIQUE
 	bt.Activated:Connect(function()
 		click:Play()
 		BotaoClicado = not BotaoClicado
+		triggerAtivo = BotaoClicado -- liga/desliga o Triggerbot
 	
 		bt.BackgroundTransparency = BotaoClicado and 0.35 or 1
 	end)
 	
+	-- // FUNÇÃO PARA SIMULAR CLIQUE DO MOUSE
+	local function mousepress()
+		local vu = game:GetService("VirtualUser")
+		vu:Button1Press(Vector2.new())
+		task.wait()
+		vu:Button1Release(Vector2.new())
+	end
+	
+	-- // LOOP PRINCIPAL DO TRIGGERBOT
+	game:GetService("RunService").RenderStepped:Connect(function()
+		if not triggerAtivo then return end
+	
+		local player = game.Players.LocalPlayer
+		local character = player.Character
+		if not character then return end
+	
+		local mouse = player:GetMouse()
+	
+		-- Raycast
+		local raycastParams = RaycastParams.new()
+		raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+		raycastParams.FilterDescendantsInstances = {character}
+	
+		local rayOrigin = mouse.Origin.Position
+		local rayDirection = (mouse.Hit.Position - mouse.Origin.Position).Unit * 1000
+		local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+	
+		if raycastResult and raycastResult.Instance then
+			local targetCharacter = raycastResult.Instance:FindFirstAncestorWhichIsA("Model")
+			if targetCharacter and targetCharacter:FindFirstChild("Humanoid") then
+				local targetPlayer = game.Players:GetPlayerFromCharacter(targetCharacter)
+				if targetPlayer and targetPlayer.Team ~= player.Team then
+					if not debounce then
+						debounce = true
+						mousepress()
+						task.wait(0.1)
+						debounce = false
+					end
+				end
+			end
+		end
+	end)
+	
 end;
-task.spawn(C_53);
+task.spawn(C_55);
 -- StarterGui.UIPuros.MainFrame.Buttons.MainButton.MainBScript
 local function C_59()
 local script = G2L["59"];
