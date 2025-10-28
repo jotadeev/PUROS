@@ -604,9 +604,9 @@ G2L["39"]["Name"] = [[CheckButton]];
 G2L["39"]["Position"] = UDim2.new(0.00085, 0, 0, 0);
 
 
--- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option5.Name.Check.CheckButton.Box
+-- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option5.Name.Check.CheckButton.Names
 G2L["3a"] = Instance.new("LocalScript", G2L["39"]);
-G2L["3a"]["Name"] = [[Box]];
+G2L["3a"]["Name"] = [[Names]];
 
 
 -- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option5.Name.Check.TextLabel
@@ -978,7 +978,7 @@ G2L["5e"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["5e"]["TextScaled"] = true;
 G2L["5e"]["BackgroundColor3"] = Color3.fromRGB(21, 21, 21);
 G2L["5e"]["FontFace"] = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["5e"]["PlaceholderText"] = [[Firerate: 0.05 - 0.45]];
+G2L["5e"]["PlaceholderText"] = [[Firerate: 0.01 - 0.45]];
 G2L["5e"]["Size"] = UDim2.new(0, 52, 0, 16);
 G2L["5e"]["Position"] = UDim2.new(6.15137, 0, 0, 0);
 G2L["5e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
@@ -2564,10 +2564,10 @@ local script = G2L["31"];
 	
 end;
 task.spawn(C_31);
--- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option5.Name.Check.CheckButton.Box
+-- StarterGui.UIPuros.MainFrame.Aimbot.EspSettings.Option5.Name.Check.CheckButton.Names
 local function C_3a()
 local script = G2L["3a"];
-	-- Name ESP acima da cabeça
+	-- Name ESP acima da cabeça (compacto, largura ajustável, tamanho dinâmico)
 	
 	local Players = game:GetService("Players")
 	local RunService = game:GetService("RunService")
@@ -2583,6 +2583,10 @@ local script = G2L["3a"];
 	-- Config
 	local ativo = false
 	local labels = {}
+	local baseTextSize = 14 -- tamanho base do texto
+	local minTextSize = 10
+	local maxTextSize = 20
+	local padding = 6 -- padding horizontal para o texto
 	
 	-- Função para criar TextLabel
 	local function criarLabel(plr)
@@ -2592,12 +2596,12 @@ local script = G2L["3a"];
 		screenGui.Parent = player:WaitForChild("PlayerGui")
 	
 		local label = Instance.new("TextLabel")
-		label.Size = UDim2.new(0, 100, 0, 20)
 		label.BackgroundTransparency = 1
 		label.TextColor3 = Color3.fromRGB(255, 255, 255)
 		label.Font = Enum.Font.Code
-		label.TextSize = 16
+		label.TextSize = baseTextSize
 		label.Text = plr.DisplayName
+		label.TextScaled = false
 		label.AnchorPoint = Vector2.new(0.5, 1)
 		label.Parent = screenGui
 	
@@ -2617,7 +2621,7 @@ local script = G2L["3a"];
 		table.clear(labels)
 	end
 	
-	-- Atualizar posição dos labels
+	-- Atualizar posição e tamanho dos labels
 	local function atualizarLabels()
 		for _, plr in pairs(Players:GetPlayers()) do
 			if plr ~= player and plr.Team ~= player.Team and plr.Character then
@@ -2632,10 +2636,22 @@ local script = G2L["3a"];
 					continue
 				end
 	
-				local posHead = camera:WorldToViewportPoint(head.Position + Vector3.new(0, 0.65, 0))
+				-- distância para escalar o tamanho do texto
+				local distance = (camera.CFrame.Position - head.Position).Magnitude
+				local scale = math.clamp(100 / distance, 0.5, 1.5)
+				local textSize = math.clamp(baseTextSize * scale, minTextSize, maxTextSize)
+	
+				local posHead = camera:WorldToViewportPoint(head.Position + Vector3.new(0, 0.45, 0)) -- acima da cabeça
 				if posHead.Z > 0 then
 					local pair = labels[plr] or criarLabel(plr)
 					pair.Label.Position = UDim2.new(0, posHead.X, 0, posHead.Y)
+					pair.Label.TextSize = textSize
+					pair.Label.Text = plr.DisplayName
+	
+					-- largura ajustável baseada no texto + padding
+					local textBounds = pair.Label.TextBounds
+					pair.Label.Size = UDim2.new(0, textBounds.X + padding, 0, textBounds.Y + 2)
+	
 					pair.Label.Visible = true
 					labels[plr] = pair
 				elseif labels[plr] then
@@ -2755,6 +2771,7 @@ local script = G2L["47"];
 		if v > MAX_SMOOTH then return MAX_SMOOTH end
 		return v
 	end
+
 	SmoothnessValue.Value = clampSmooth(SmoothnessValue.Value)
 	
 	-- variavel local usada no loop (atualizada quando SmoothnessValue mudar)
@@ -3000,8 +3017,10 @@ local script = G2L["5c"];
 	-- // ESTADO
 	local triggerAtivo = false
 	local lastClickTime = 0
-	local TriggerDebounce = Instance.new("NumberValue") -- você pode ajustar o valor depois
-	TriggerDebounce.Value = 0.2 -- 0.2 segundos de debounce entre cliques
+	
+	-- Usando TriggerDebounce existente (não criar novo)
+	local TriggerDebounce = script:WaitForChild("TriggerDebounce")
+	TriggerDebounce.Value = 0.01 -- DEBOUNCE MAIS RÁPIDO (10ms entre tiros)
 	
 	-- // SERVIÇOS
 	local RunService = game:GetService("RunService")
@@ -3074,14 +3093,14 @@ local script = G2L["60"];
 			local num = tonumber(text)
 	
 			if num then
-				-- Limita o valor entre 0.01 e 1 segundo
-				if num < 0.05 then
-					num = 0.05
+				-- Limita o valor entre 0.01 e 0.45 segundo (mais rápido!)
+				if num < 0.01 then
+					num = 0.01
 				elseif num > 0.45 then
 					num = 0.45
 				end
 	
-				-- Atualiza o valor
+				-- Atualiza o valor do debounce
 				TriggerDebounce.Value = num
 				KeyBoxTrigger.Text = tostring(num)
 				print("Trigger debounce atualizado para:", num)
