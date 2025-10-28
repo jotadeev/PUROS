@@ -2777,55 +2777,54 @@ local script = G2L["55"];
 	local woosh = sounds:WaitForChild("Woosh")
 	
 	-- // ESTADO
-	local BotaoClicado = false
-	local debounce = false -- evita cliques múltiplos
 	local triggerAtivo = false
+	local debounce = false
 	
-	-- // FUNÇÃO DE CLIQUE
+	-- // SERVIÇOS
+	local RunService = game:GetService("RunService")
+	local Players = game:GetService("Players")
+	local VirtualInputManager = game:GetService("VirtualInputManager")
+	local camera = workspace.CurrentCamera
+	local player = Players.LocalPlayer
+	
+	-- // FUNÇÃO DE CLIQUE DO BOTÃO
 	bt.Activated:Connect(function()
 		click:Play()
-		BotaoClicado = not BotaoClicado
-		triggerAtivo = BotaoClicado -- liga/desliga o Triggerbot
-	
-		bt.BackgroundTransparency = BotaoClicado and 0.35 or 1
+		triggerAtivo = not triggerAtivo
+		bt.BackgroundTransparency = triggerAtivo and 0.35 or 1
 	end)
 	
-	-- // FUNÇÃO PARA SIMULAR CLIQUE DO MOUSE
-	local function mousepress()
-		local vu = game:GetService("VirtualUser")
-		vu:Button1Press(Vector2.new())
+	-- // FUNÇÃO PARA SIMULAR MouseButton1Click
+	local function simularClick()
+		VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0) -- MouseButton1Down
 		task.wait()
-		vu:Button1Release(Vector2.new())
+		VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0) -- MouseButton1Up
 	end
 	
 	-- // LOOP PRINCIPAL DO TRIGGERBOT
-	game:GetService("RunService").RenderStepped:Connect(function()
+	RunService.RenderStepped:Connect(function()
 		if not triggerAtivo then return end
-	
-		local player = game.Players.LocalPlayer
-		local character = player.Character
-		if not character then return end
+		if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
 	
 		local mouse = player:GetMouse()
+		local rayOrigin = camera.CFrame.Position
+		local rayDirection = (mouse.Hit.Position - rayOrigin).Unit * 1000
 	
-		-- Raycast
-		local raycastParams = RaycastParams.new()
-		raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
-		raycastParams.FilterDescendantsInstances = {character}
+		local params = RaycastParams.new()
+		params.FilterType = Enum.RaycastFilterType.Blacklist
+		params.FilterDescendantsInstances = {player.Character}
 	
-		local rayOrigin = mouse.Origin.Position
-		local rayDirection = (mouse.Hit.Position - mouse.Origin.Position).Unit * 1000
-		local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+		local result = workspace:Raycast(rayOrigin, rayDirection, params)
 	
-		if raycastResult and raycastResult.Instance then
-			local targetCharacter = raycastResult.Instance:FindFirstAncestorWhichIsA("Model")
+		if result and result.Instance then
+			local targetCharacter = result.Instance:FindFirstAncestorWhichIsA("Model")
 			if targetCharacter and targetCharacter:FindFirstChild("Humanoid") then
-				local targetPlayer = game.Players:GetPlayerFromCharacter(targetCharacter)
+				local targetPlayer = Players:GetPlayerFromCharacter(targetCharacter)
 				if targetPlayer and targetPlayer.Team ~= player.Team then
 					if not debounce then
 						debounce = true
-						mousepress()
-						task.wait(0.1)
+						simularClick()
+						task.wait(0.05)
 						debounce = false
 					end
 				end
