@@ -824,7 +824,7 @@ G2L["50"]["Visible"] = false;
 G2L["50"]["BorderSizePixel"] = 0;
 G2L["50"]["BackgroundColor3"] = Color3.fromRGB(27, 27, 27);
 G2L["50"]["Size"] = UDim2.new(0.95714, 0, 0.09589, 0);
-G2L["50"]["Position"] = UDim2.new(0.016, 0, 0.68, 0);
+G2L["50"]["Position"] = UDim2.new(0.016, 0, 0.48, 0);
 G2L["50"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 G2L["50"]["Name"] = [[Option3]];
 G2L["50"]["BackgroundTransparency"] = 1;
@@ -2778,7 +2778,6 @@ local script = G2L["55"];
 	
 	-- // ESTADO
 	local triggerAtivo = false
-	local debounce = false
 	
 	-- // SERVIÇOS
 	local RunService = game:GetService("RunService")
@@ -2794,10 +2793,10 @@ local script = G2L["55"];
 		bt.BackgroundTransparency = triggerAtivo and 0.35 or 1
 	end)
 	
-	-- // FUNÇÃO PARA SIMULAR MouseButton1Click
+	-- // FUNÇÃO PARA SIMULAR CLIQUE (LMB)
 	local function simularClick()
-		VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0) -- MouseButton1Down
-		task.wait()
+		VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)  -- MouseButton1Down
+		task.wait(0.02)
 		VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0) -- MouseButton1Up
 	end
 	
@@ -2806,9 +2805,8 @@ local script = G2L["55"];
 		if not triggerAtivo then return end
 		if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
 	
-		local mouse = player:GetMouse()
 		local rayOrigin = camera.CFrame.Position
-		local rayDirection = (mouse.Hit.Position - rayOrigin).Unit * 1000
+		local rayDirection = camera.CFrame.LookVector * 1000 -- mira seguindo a câmera
 	
 		local params = RaycastParams.new()
 		params.FilterType = Enum.RaycastFilterType.Blacklist
@@ -2821,12 +2819,7 @@ local script = G2L["55"];
 			if targetCharacter and targetCharacter:FindFirstChild("Humanoid") then
 				local targetPlayer = Players:GetPlayerFromCharacter(targetCharacter)
 				if targetPlayer and targetPlayer.Team ~= player.Team then
-					if not debounce then
-						debounce = true
-						simularClick()
-						task.wait(0.05)
-						debounce = false
-					end
+					simularClick()
 				end
 			end
 		end
