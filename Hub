@@ -3387,7 +3387,8 @@ local script = G2L["b2"];
 		
 		-- TESTER Key
 		["vylurean"] = "TESTERKEY2",
-		["seupai_eumorriconfia"] = "TESTERKEY3"
+		["seupai_eumorriconfia"] = "TESTERKEY3",
+		["pq_chorar123"] = "TESTERKEY4"
 		-- 1-DAY Key
 		
 	}
